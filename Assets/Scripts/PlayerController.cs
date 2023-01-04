@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
             jumpsRemaining = maxJumps;
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         // Check if the player's collider left the collider of the ground
