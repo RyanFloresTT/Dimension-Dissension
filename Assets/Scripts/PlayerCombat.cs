@@ -11,12 +11,15 @@ public class PlayerCombat : MonoBehaviour
     public float comboResetTime = 2.0f;
     public GameObject arrowPrefab;
     public float arrowVelocity;
+    public float arrowInstantiationDelay = 0.5f;
     public Transform arrowSpawnPoint;
     private float comboTimer;
+    private Animator animator;
+    private bool attackStarted;
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,26 +54,50 @@ public class PlayerCombat : MonoBehaviour
         comboTimer = 0;
 
         // Make sure attack combo is below max, if it isn't, reset it and perform another attack.
-        if (combo < maxCombo)
+        if (combo < maxCombo && !attackStarted)
         {
+            attackStarted = true;
             // Do the attack
-            Attack();
+            StartCoroutine(Attack());
         }
-        else if (combo == maxCombo)
+        else if (combo == maxCombo && !attackStarted)
         {
+            attackStarted = true;
             // Combo Attack
-            Attack(2f);
+            StartCoroutine(Attack(2f));
         }
         else
         {
+            attackStarted = true;
             // Reset combo and attack
             combo = 0;
             combo++;
-            Attack();
+            StartCoroutine(Attack());
         }
     }
 
-    public void Attack(float bonusSpeed = 1f) {
+    IEnumerator Attack(float bonusSpeed = 1f)
+    {
+        
+        // Get the clip info for the current animation
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+
+        // Set the wrap mode of the attack animation to Once
+        clipInfo[0].clip.wrapMode = WrapMode.Once;
+
+        // Calculate the normalized time at which the arrow should be instantiated
+        float arrowInstantiationTime = Time.time + arrowInstantiationDelay;
+
+        // Set Player Animation to Attack
+        animator.Play("Shot1_Skeleton_Archer", 0, arrowInstantiationTime);
+            
+        // Wait until the desired time to instantiate the arrow
+        while (Time.time < arrowInstantiationTime)
+        {
+            // Wait for the next frame
+            yield return null;
+        }
+
         // Instantiate the arrow prefab at the arrow spawn point
         GameObject arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, arrowSpawnPoint.rotation);
 
@@ -89,5 +116,19 @@ public class PlayerCombat : MonoBehaviour
         // Destroy arrow after 2 seconds
         Destroy(arrow, 2f);
 
+        // Reset the attack trigger after a short delay
+        Invoke("ResetAttackTrigger", clipInfo[0].clip.length);
+
+        // Wait 2 seconds before allowing the attack to be called again
+        yield return new WaitForSeconds(2.0f);
+
+        // Reset the attackStarted flag
+        attackStarted = false;
+    }
+
+    // Resets the attack trigger and sets the idle trigger
+    void ResetAttackTrigger()
+    {
+        animator.ResetTrigger("Shoot");
     }
 }
