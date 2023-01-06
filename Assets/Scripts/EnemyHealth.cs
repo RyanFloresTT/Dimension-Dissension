@@ -27,4 +27,10 @@ public class EnemyHealth : MonoBehaviour
     {
         health -= damage;
     }
+
+    void OnDestroy()
+    {
+        // Restart the enemy spawn loop when the enemy is destroyed
+        EnemySpawner.instance.StartCoroutine(EnemySpawner.instance.SpawnEnemies());
+    }
 }
