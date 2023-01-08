@@ -37,6 +37,5 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = currentHealth - damage;
         UpdateHealthUI();
-        animator.SetTrigger("Hit");
     }
 }

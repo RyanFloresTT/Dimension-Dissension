@@ -20,13 +20,4 @@ public class ChaseDetection : MonoBehaviour
             script.chasing = true;
         }
     }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        // Check if the enemy is entering the player's trigger collider
-        if (collider.gameObject.tag == "Player")
-        {
-            script.chasing = false;
-        }
-    }
 }

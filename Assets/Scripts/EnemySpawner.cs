@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
     // Called once at the start of the script
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        //StartCoroutine(SpawnEnemies());
     }
 
     // Spawns Enemies

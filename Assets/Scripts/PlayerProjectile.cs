@@ -4,18 +4,35 @@ using UnityEngine;
 
 public class PlayerProjectile : MonoBehaviour
 {
-    Animator animator;
+    // Direction of the arcane bolt
+    public Vector3 direction;
+
+    // Owner of the arcane bolt (the player that shot it)
+    public GameObject owner;
+
+    // Movement speed of the arcane bolt
+    public float speed = 5.0f;
+
+    // Damage dealt by the arcane bolt
     public int damage = 1;
-    void OnTriggerEnter2D(Collider2D collision)
+
+    // Update is called once per frame
+    void Update()
     {
-        if (collision.gameObject.tag == "Enemy")
+        // Move the arcane bolt in the specified direction
+        transform.position += direction * speed * Time.deltaTime;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check if the arcane bolt has collided with an enemy
+        if (other.tag == "Enemy")
         {
-            animator = collision.gameObject.GetComponent<Animator>();
-            animator.SetTrigger("Hit");
+            // Deal damage to the enemy
+            other.GetComponent<EnemyHealth>().TakeDamage(damage);
+
+            // Destroy the arcane bolt
             Destroy(gameObject);
-            Debug.Log("Hit");
-            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
-            enemyHealth.TakeDamage(damage);
         }
     }
 }

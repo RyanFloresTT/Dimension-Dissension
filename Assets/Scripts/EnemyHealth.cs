@@ -6,25 +6,25 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 10;
     private int health;
-    private Animator animator;
+    private Material mat; 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
         health = startingHealth;
+        mat = GetComponent<Renderer>().material;
     }
 
     void Update()
     {
         if (health <= 0)
         {
-            animator.Play("Death_Skeleton_Warrior");
             Destroy(gameObject, 0.444f);
         }
     }
 
     public void TakeDamage(int damage)
     {
+        mat.SetFloat("_HitEffectBlend", 0.135f);
         health -= damage;
     }
 

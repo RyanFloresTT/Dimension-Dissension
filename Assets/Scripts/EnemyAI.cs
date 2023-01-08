@@ -11,8 +11,7 @@ public class EnemyAI : MonoBehaviour
     private float lastAttackTime = 0f;
     public bool chasing = false;
     private GameObject player;
-    private new Rigidbody2D rigidbody;
-    private Animator animator;
+    private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
 
     private void Awake() 
@@ -23,8 +22,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); 
+        rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>(); 
     }
 
@@ -33,7 +31,6 @@ public class EnemyAI : MonoBehaviour
     {        
         if (chasing) 
         {
-            animator.SetBool("isMoving", true);
             // Calculate the distance between the enemy and the player
             float distance = Vector2.Distance(transform.position, player.transform.position);
 
@@ -53,7 +50,6 @@ public class EnemyAI : MonoBehaviour
             }
             else
             { 
-                animator.SetBool("isMoving", false);
                 // Check if enough time has passed since the last attack
                 if (Time.time - lastAttackTime > attackDelay)
                 {
@@ -65,43 +61,11 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            animator.SetBool("isMoving", false);
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        // Check if the enemy's collider entered the collider of the ground
-        if (collision.gameObject.tag == "Ground")
-        {
-            // Set the "Idle" or "Move" trigger in the Animator component
-            // depending on the current state of the enemy
-            
-            if (animator.GetBool("isMoving"))
-            {
-                animator.Play("Walking_Skeleton_Warrior");
-            }
-            else
-            {
-                animator.Play("Idle_Skeleton_Warrior");
-            }
-        }
-    }
+    }   
 
     // Attack is called to attack the player
     void Attack()
     {
-        // Get the clip info for the current animation
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
-
-        // Set the wrap mode of the attack animation to Once
-        clipInfo[0].clip.wrapMode = WrapMode.Once;
-        
-        // Play the attack animation
-        animator.Play("Attack_Skeleton_Warrior");
-
         // Check if the player has a Health component
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
@@ -109,13 +73,5 @@ public class EnemyAI : MonoBehaviour
             // Apply damage to the player
             playerHealth.TakeDamage(attackDamage);
         }
-        // Reset the attack trigger after a short delay
-        Invoke("ResetAttackTrigger", clipInfo[0].clip.length);
-    }
-
-    // Resets the attack trigger and sets the idle trigger
-    void ResetAttackTrigger()
-    {
-        animator.ResetTrigger("Attack");
     }
 }

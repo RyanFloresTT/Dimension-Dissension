@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1084988490719107676}
-  - component: {fileID: 1084988490719107677}
   - component: {fileID: 1084988490719107678}
   - component: {fileID: 1084988490719107674}
   - component: {fileID: 1084988490719107672}
@@ -38,28 +37,8 @@ Transform:
   - {fileID: 1084988491949273918}
   - {fileID: 1084988490859085535}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1084988490719107677
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084988490719107679}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19d98408dae85ce4f85d4b7c090f12eb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &1084988490719107678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -101,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1301245386, guid: 4fe98e267272c9f4484b84ce84cf3d1e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dee2b4e4e7101724e92de8cc3ba9967b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -127,7 +106,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -146,18 +125,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0}
+  m_Offset: {x: 0.00030860305, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.578125, y: 1}
-    newSize: {x: 2, y: 2}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.41, y: 1.01}
+  m_Size: {x: 1.0102315, y: 1.01}
   m_EdgeRadius: 0
 --- !u!114 &1084988490719107673
 MonoBehaviour:
@@ -171,10 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e939d61c6332ae84bad552e198db1ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1.12
-  climbingSpeed: 3.5
-  jumpForce: 4
-  maxJumps: 2
+  movementSpeed: 6
 --- !u!114 &1084988490719107670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,13 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTime: 1
   attackDelay: 1
-  combo: 0
-  maxCombo: 3
-  comboResetTime: 2
-  arrowPrefab: {fileID: 4816823719059332998, guid: d4c0fdc8e43052147bf73b7f0693152d, type: 3}
-  arrowVelocity: 6.5
-  arrowInstantiationDelay: 0.5
-  arrowSpawnPoint: {fileID: 1084988491949273918}
+  projPrefab: {fileID: 4816823719059332998, guid: d4c0fdc8e43052147bf73b7f0693152d, type: 3}
+  projVelocity: 5
 --- !u!114 &1084988490719107671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +226,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -306,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084988491949273918}
   m_Layer: 0
-  m_Name: ArrowSpawnPoint
+  m_Name: ProjectileSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -320,7 +291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084988491949273919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.004, y: 0.258, z: 0}
+  m_LocalPosition: {x: 0.245, y: -0.178, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

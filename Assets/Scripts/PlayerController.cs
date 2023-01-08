@@ -5,121 +5,40 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5.0f;
-    public float climbingSpeed = 3.5f;
-    public float jumpForce = 10.0f;
-    public int maxJumps = 2;
 
-    private new Rigidbody2D rigidbody;
-    private int jumpsRemaining;
-    private Animator animator;
-    private bool isClimbing;
-    private void Start()
+    private SpriteRenderer spriteRenderer;
+    private bool facingLeft = false;
+    void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        jumpsRemaining = maxJumps;
-        // Get a reference to the Animator component
-        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    void Update()
     {
-        // Get input from the horizontal axis
-        float input = Input.GetAxis("Horizontal");
+        // Get input for the horizontal and vertical axes
+        float horizontalInput = 0;
+        float verticalInput = 0;
+        if (Input.GetKey(KeyCode.A)) horizontalInput = -1;
+        if (Input.GetKey(KeyCode.D)) horizontalInput = 1;
+        if (Input.GetKey(KeyCode.W)) verticalInput = 1;
+        if (Input.GetKey(KeyCode.S)) verticalInput = -1;
 
-        // If the player is moving, move, and set the animation to show
-        if (input != 0)
+        if (horizontalInput < 0 && !facingLeft)
         {
-            // Set animator to show walking animation
-            animator.SetBool("isMoving", true);
-            // If going right, switch X scale to 1, else 'turn around' (Every now and then I get a little bit lonely...)
-            if (input < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
-            else if (input > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            // Set the player's velocity based on the input
-            rigidbody.velocity = new Vector2(input * movementSpeed, rigidbody.velocity.y);
+            spriteRenderer.flipX = true;
+            facingLeft = true;
         }
-        // If the player is not moving, set animation to stop showing
-        if (input == 0)
+        // Reset the flip if the player starts moving right
+        else if (horizontalInput > 0 && facingLeft)
         {
-            animator.SetBool("isMoving", false);
+            spriteRenderer.flipX = false;
+            facingLeft = false;
         }
-        // Check for jump input
-        if (Input.GetButtonDown("Jump") && jumpsRemaining > 0)
-        {
-            // Apply a force to the player's rigidbody in the upward direction
-            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
-            // Decrement the number of jumps remaining
-            jumpsRemaining--;
-        }
-        // Check if the player is climbing
-        if (isClimbing)
-        {
-            // Get input from the vertical axis
-            float vinput = Input.GetAxis("Vertical");
+        // Calculate the direction the player should move in
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
 
-            // Set the player's velocity based on the input
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, vinput * climbingSpeed);
-
-            // Set the player's gravity scale to 0 while climbing
-            rigidbody.gravityScale = 0.0f;
-        }
-        else
-        {
-            // Set the player's gravity scale back to normal when not climbing
-            rigidbody.gravityScale = 1.0f;
-        }
-    }
-    
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // Check if the player's collider entered the collider of the ground
-        if (collision.gameObject.tag == "Ground")
-        {
-            // Set the "Idle" or "Move" trigger in the Animator component
-            // depending on the current state of the character
-            
-            if (animator.GetBool("isMoving"))
-            {
-                animator.Play("Walking_Skeleton_Archer");
-            }
-            else
-            {
-                animator.Play("Idle_Skeleton_Archer");
-            }
-            // Reset the number of jumps remaining
-            jumpsRemaining = maxJumps;
-        }
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // Check if the player's collider left the collider of the ground
-        if (collision.gameObject.tag == "Ground")
-        {
-            animator.SetTrigger("Jump");
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Check if the player's collider is no longer overlapping the trigger collider of a ladder or rope
-        if (collision.gameObject.tag == "Climb")
-        {
-            // Disable climbing behavior
-            isClimbing = false;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // Check if the player's collider is overlapping the trigger collider of a ladder or rope
-        if (collision.gameObject.tag == "Climb")
-        {
-            // Enable climbing behavior
-            isClimbing = true;
-        }
+        // Move the player in the calculated direction
+        transform.position += direction * movementSpeed * Time.deltaTime;
     }
 }
