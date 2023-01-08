@@ -11,7 +11,7 @@ public class PlayerProjectile : MonoBehaviour
     public GameObject owner;
 
     // Movement speed of the arcane bolt
-    public float speed = 5.0f;
+    public float speed;
 
     // Damage dealt by the arcane bolt
     public int damage = 1;
@@ -27,7 +27,10 @@ public class PlayerProjectile : MonoBehaviour
     {
         // Check if the arcane bolt has collided with an enemy
         if (other.tag == "Enemy")
-        {
+        {   
+            // tell the enemy they were hit, so they can chase the player
+            other.GetComponent<EnemyAI>().wasHit = true;
+
             // Deal damage to the enemy
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
 

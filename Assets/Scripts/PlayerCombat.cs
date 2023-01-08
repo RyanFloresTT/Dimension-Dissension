@@ -6,6 +6,7 @@ public class PlayerCombat : MonoBehaviour
 {
     public float attackTime = 1.0f;
     public float attackDelay = 1.0f;
+    public float projectileSpeed = 5.0f;
     public GameObject projPrefab;
 
     // Update is called once per frame
@@ -46,7 +47,13 @@ public class PlayerCombat : MonoBehaviour
         // Set the direction of the arcane bolt
         projectile.GetComponent<PlayerProjectile>().direction = direction;
 
+        // Set the speed of the projectile
+        projectile.GetComponent<PlayerProjectile>().speed = projectileSpeed;
+
         // Set the player as the owner of the arcane bolt
         projectile.GetComponent<PlayerProjectile>().owner = gameObject;
+
+        // Destroy Projectile after 2 seconds
+        Destroy(projectile, 2);
     }
 }
