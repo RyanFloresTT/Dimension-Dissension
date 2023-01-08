@@ -20,6 +20,12 @@ public class QuestManager : MonoBehaviour
         UpdateScrollText();
     }
 
+    // Call Update for the quest
+    void Update()
+    {
+        quest.Update();
+    }
+
     // Sets the current objective to the first set objective
     public void OnObjective1ButtonClicked()
     {
@@ -48,12 +54,18 @@ public class QuestManager : MonoBehaviour
         Time.timeScale = 1;
         buttons.SetActive(false);
         healthText.SetActive(true);
+
+        // Get the type of the quest the player chose
         QuestType questType = quest.type;
 
+        // Get the Class type by adding "Quest" to the end of the Quet Type
         Type questClassType = Type.GetType(questType.ToString() + "Quest");
 
-        object[] parameters = new object[] { quest.name, quest.description, quest.type, quest.difficulty, quest.reward};
-        Quest currentQuest = (Quest)Activator.CreateInstance(questClassType, parameters);
+        //Get parameters of the chosen quest
+        object[] parameters = new object[] { quest.questName, quest.description, quest.type, quest.difficulty, quest.prefabs, quest.progress, quest.reward};
+
+        // Create an instance of the class of type quest the player chose and pass the parameters through
+        quest = (Quest)Activator.CreateInstance(questClassType, parameters);
     }
 
     // Updates the Text of the 3 scrolls so that the player can see what options to choose
@@ -65,12 +77,12 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < quests.Length; i++)
         {
             // Get the name and description of the objective
-            string objectiveName = quests[i].name;
-            string objectiveDescription = quests[i].description;
+            string questName = quests[i].questName;
+            string questDescription = quests[i].description;
 
             // Set the text of the name and description UI elements
-            scrollUIs[i].transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = objectiveName;
-            scrollUIs[i].transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = objectiveDescription;
+            scrollUIs[i].transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
+            scrollUIs[i].transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
         }
 
     }
