@@ -5,15 +5,15 @@ using UnityEngine;
 public class CursorController : MonoBehaviour
 {
     // Texture to use for the cursor
-    public Texture2D cursorTexture;
+    [SerializeField] private Texture2D _cursorTexture;
 
     // Hotspot of the cursor (the point that is used to determine the position of the cursor)
-    public Vector2 hotspot = Vector2.zero;
+    [SerializeField] private Vector2 _hotspot = Vector2.zero;
 
     // Use this for initialization
     void Start()
     {
         // Set the cursor to the specified texture with the hotspot at the specified position
-        Cursor.SetCursor(cursorTexture, hotspot, CursorMode.Auto);
+        Cursor.SetCursor(_cursorTexture, _hotspot, CursorMode.Auto);
     }
 }

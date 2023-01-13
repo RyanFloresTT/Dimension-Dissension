@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4441000244151731675}
   - component: {fileID: 4441000244151731673}
-  - component: {fileID: 4441000244151731653}
   - component: {fileID: 4441000244151731652}
+  - component: {fileID: 1690959146346656585}
   - component: {fileID: 4441000244151731655}
-  - component: {fileID: 8370841909186625060}
+  - component: {fileID: 8060510518976443219}
   - component: {fileID: 7334201867088210091}
   m_Layer: 0
   m_Name: Zombie
@@ -36,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 4441000244162375072}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4441000244151731673
 SpriteRenderer:
@@ -90,27 +90,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4441000244151731653
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4441000244151731676}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &4441000244151731652
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -121,7 +100,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0022563934, y: 0.0045131445}
@@ -137,6 +116,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0131588, y: 1.022208}
   m_EdgeRadius: 0
+--- !u!114 &1690959146346656585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441000244151731676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6df47beca65164a854adbe4dc20231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 1
+  chasing: 0
+  _attackRange: 1
 --- !u!114 &4441000244151731655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
---- !u!114 &8370841909186625060
+--- !u!114 &8060510518976443219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,12 +153,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4441000244151731676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91213ca3dd8956448863f25d4a27516d, type: 3}
+  m_Script: {fileID: 11500000, guid: b93588b9bd0d68042972a48d20279fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  chasing: 0
-  wasHit: 0
+  attackDamage: 1
+  playerGameObject: {fileID: 1084988490719107679, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
 --- !u!114 &7334201867088210091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,3 +235,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3172f2501adc72c4aaee9ca2a658b038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGameObject: {fileID: 1084988490719107679, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}

@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class ChaseDetection : MonoBehaviour
 {
-    EnemyAI script;
-    void Start()
+    [SerializeField] GameObject _playerGameObject;
+    private EnemyMovement _enemyScript;
+    void Awake()
     {
         var parentGameObject = this.transform.parent.gameObject;
-        script = parentGameObject.GetComponent<EnemyAI>();
+        _enemyScript = parentGameObject.GetComponent<EnemyMovement>();
     }
 
     // OnTriggerEnter2D is called when the enemy's collider enters a trigger collider
     void OnTriggerEnter2D(Collider2D collider)
     {
         // Check if the enemy is entering the player's trigger collider
-        if (collider.gameObject.tag == "Player")
+        if (collider.gameObject == _playerGameObject)
         {
-            script.chasing = true;
+            _enemyScript.chasing = true;
         }
     }
 }

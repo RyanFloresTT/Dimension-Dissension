@@ -29,7 +29,7 @@ public class PlayerProjectile : MonoBehaviour
         if (other.tag == "Enemy")
         {   
             // tell the enemy they were hit, so they can chase the player
-            other.GetComponent<EnemyAI>().wasHit = true;
+            other.GetComponent<EnemyMovement>().chasing = true;
 
             // Deal damage to the enemy
             other.GetComponent<EnemyHealth>().TakeDamage(damage);
