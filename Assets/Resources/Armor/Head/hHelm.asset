@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77699586220564e4ab2a6ecf21ad08d5, type: 3}
+  m_Name: hHelm
+  m_EditorClassIdentifier: 
+  armorName: Steel Helm
+  attackRating: 3
+  armorRating: 3
+  sprite: {fileID: 589418698, guid: 7ad938cfd4954244da53e525de370b45, type: 3}

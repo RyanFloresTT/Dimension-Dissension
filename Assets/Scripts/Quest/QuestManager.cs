@@ -31,6 +31,11 @@ public class QuestManager : MonoBehaviour
         _leftQuestButton.SetActive(false);
     }
 
+    private void Update()
+    {
+        
+    }
+
     private void PopulateQuestList()
     {
         levelOneQuests = Resources.LoadAll<KillQuest>("LevelOneQuests");

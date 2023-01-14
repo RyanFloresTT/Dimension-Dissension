@@ -18,5 +18,5 @@ MonoBehaviour:
   _prefabs:
   - {fileID: 4441000244151731676, guid: deb0c6688719c6f48a0821cb8410211b, type: 3}
   - {fileID: 4441000244151731676, guid: 4d34e61cb2f10b641b6bef9afa77381f, type: 3}
-  _requirement: 7
-  reward: {fileID: 11400000, guid: efc1fc30cbb11be4eb23aaa09a5cefe2, type: 2}
+  _requirement: 8
+  reward: {fileID: 11400000, guid: 2e7b9ff27088e6347825abe8ffc6f366, type: 2}

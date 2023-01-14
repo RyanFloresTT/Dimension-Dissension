@@ -25,17 +25,14 @@ public class ArmorToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         _toolTip.SetActive(false);
         _questManager = QuestManager.instance;
         _armorManager = PlayerArmorManager.instance;
-        _rewardName = _toolTip.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text;
-        _attackRating = _toolTip.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text;
-        _armorRating = _toolTip.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text;
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (isRewardTooltip)
         {
-            _rewardName = _questManager.levelOneQuests[_questManager.questIndex].reward.armorName;
-            _attackRating = "Attack: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.attackRating;
-            _armorRating = "Armor: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.armorRating;
+            _toolTip.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = _questManager.levelOneQuests[_questManager.questIndex].reward.armorName;
+            _toolTip.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.attackRating;
+            _toolTip.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.armorRating;
             _toolTip.SetActive(true);
         }
         else
@@ -49,9 +46,9 @@ public class ArmorToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                     if (armorSlot != null)
                     {
                         _itemSlot.GetComponent<Image>().sprite = armorSlot.sprite;
-                        _rewardName = armorSlot.armorName;
-                        _attackRating = "Attack: +" + armorSlot.attackRating;
-                        _armorRating = "Armor: +" + armorSlot.armorRating;
+                        _toolTip.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = armorSlot.armorName;
+                        _toolTip.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + armorSlot.attackRating;
+                        _toolTip.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + armorSlot.armorRating;
                         _toolTip.SetActive(true);
                     }
                 }
@@ -64,9 +61,9 @@ public class ArmorToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                     if (armorSlot != null)
                     {
                         _itemSlot.GetComponent<Image>().sprite = armorSlot.sprite;
-                        _rewardName = armorSlot.armorName;
-                        _attackRating = "Attack: +" + armorSlot.attackRating;
-                        _armorRating = "Armor: +" + armorSlot.armorRating;
+                        _toolTip.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = armorSlot.armorName;
+                        _toolTip.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + armorSlot.attackRating;
+                        _toolTip.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + armorSlot.armorRating;
                         _toolTip.SetActive(true);
                     }
                 }
@@ -79,9 +76,9 @@ public class ArmorToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                     if (armorSlot != null)
                     {
                         _itemSlot.GetComponent<Image>().sprite = armorSlot.sprite;
-                        _rewardName = armorSlot.armorName;
-                        _attackRating = "Attack: +" + armorSlot.attackRating;
-                        _armorRating = "Armor: +" + armorSlot.armorRating;
+                        _toolTip.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = armorSlot.armorName;
+                        _toolTip.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + armorSlot.attackRating;
+                        _toolTip.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + armorSlot.armorRating;
                         _toolTip.SetActive(true);
                     }
                 }

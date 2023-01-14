@@ -10,7 +10,6 @@ public class QuestBase : ScriptableObject
     private int _progress;
     [SerializeField] private int _requirement;
     [SerializeField] public GameObject reward;
-    private bool _isCompleted = false;
 
     // Class Variables
     private EnemySpawner _enemySpawner;
@@ -33,7 +32,6 @@ public class QuestBase : ScriptableObject
 
     public void CompleteQuest()
     {
-        _isCompleted = true;
         Debug.Log("Quest Completed");
     }
 

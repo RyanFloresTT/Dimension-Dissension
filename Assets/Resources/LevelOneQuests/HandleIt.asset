@@ -19,4 +19,4 @@ MonoBehaviour:
   - {fileID: 4441000244151731676, guid: deb0c6688719c6f48a0821cb8410211b, type: 3}
   - {fileID: 4441000244151731676, guid: 4d34e61cb2f10b641b6bef9afa77381f, type: 3}
   _requirement: 5
-  reward: {fileID: 11400000, guid: f5da7073c9dfd5248ac639cbf16d53fc, type: 2}
+  reward: {fileID: 11400000, guid: 9c2c974364fac1e479de60d5e256bf72, type: 2}

@@ -11,7 +11,6 @@ public class KillQuest : ScriptableObject
     private int _progress;
     [SerializeField] private int _requirement;
     [SerializeField] public ArmorBase reward;
-    private bool _isCompleted = false;
 
     // Class Variables
     private RewardHandler _rewardHandler;
@@ -37,7 +36,6 @@ public class KillQuest : ScriptableObject
 
     public void CompleteQuest()
     {
-        _isCompleted = true;
         _rewardHandler.HandleRewards(reward);
         Debug.Log("Quest Completed");
     }
