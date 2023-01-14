@@ -14,7 +14,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (collision.gameObject == playerGameObject)
         { 
-            playerGameObject.GetComponent<PlayerStats>().TakeDamage(attackDamage);
+            playerGameObject.GetComponent<Player>().TakeDamage(attackDamage);
         }
     }
 }

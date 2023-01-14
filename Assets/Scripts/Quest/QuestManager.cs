@@ -1,50 +1,85 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using UnityEngine;
-using TMPro;
-using System;
+using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
-    public GameObject healthText;
-    public GameObject buttons;
-    public Quest[] quests;
-    public Quest quest;
+    [SerializeField] private GameObject _healthText;
+    [SerializeField] private GameObject _questGroup;
+    [SerializeField] private GameObject _leftQuestButton;
+    [SerializeField] private GameObject _rightQuestButton;
+    [SerializeField] private GameObject _questBoard;
+    private int questIndex = 0;
+    private KillQuest[] levelOneQuests;
+    public KillQuest currentQuest;
+
+    // Singleton Setup
+    public static QuestManager   instance { get; private set; }
+    void OnEnable() { instance = this; }
+    void OnDisable() { instance = null; }
+
 
     // Start is called before the first frame update
     void Start()
     {   
-        healthText.SetActive(false);
+        currentQuest = null;
+        _healthText.SetActive(false);
         Time.timeScale = 0;
+        PopulateQuestList();
         UpdateScrollText();
+
+        _leftQuestButton.SetActive(false);
     }
 
-    // Call Update for the quest
-    void Update()
+    private void PopulateQuestList()
     {
-        quest.Update();
+        levelOneQuests = Resources.LoadAll<KillQuest>("LevelOneQuests");
     }
 
     // Sets the current objective to the first set objective
     public void OnObjective1ButtonClicked()
     {
-        quest = quests[0];
+        currentQuest = levelOneQuests[questIndex];
         StartQuest();
     }
     
     // Sets the current objective to the second set objective
     public void OnObjective2ButtonClicked()
     {
-        quest = quests[1];
+        currentQuest = levelOneQuests[questIndex];
         StartQuest();
     }
     
     // Sets the current objective to the third set objective
     public void OnObjective3ButtonClicked()
     {
-        quest = quests[2];
+        currentQuest = levelOneQuests[questIndex];
         StartQuest();
+    }
+
+    public void OnNextQuestLeftButtonClicked()
+    {
+        questIndex--;
+        if (questIndex == 0)
+            _leftQuestButton.SetActive(false);
+
+        if (questIndex == levelOneQuests.Length - 2)
+            _rightQuestButton.SetActive(true);
+
+        UpdateScrollText();
+    }    
+
+    public void OnNextQuestRightButtonClicked()
+    {
+        questIndex++;
+        if (questIndex == levelOneQuests.Length - 1)
+            _rightQuestButton.SetActive(false);
+
+        if (questIndex == 1)
+            _leftQuestButton.SetActive(true);
+
+        UpdateScrollText();
+
     }
 
     // Puts the game back into play and starts the quest
@@ -52,38 +87,21 @@ public class QuestManager : MonoBehaviour
     {
         // Puts time back to normal and toggles active states of UI elements
         Time.timeScale = 1;
-        buttons.SetActive(false);
-        healthText.SetActive(true);
+        _healthText.SetActive(true);
+        _questGroup.SetActive(false);
+        currentQuest.StartQuest();
 
-        // Get the type of the quest the player chose
-        QuestType questType = quest.type;
-
-        // Get the Class type by adding "Quest" to the end of the Quet Type
-        Type questClassType = Type.GetType(questType.ToString() + "Quest");
-
-        //Get parameters of the chosen quest
-        object[] parameters = new object[] { quest.questName, quest.description, quest.type, quest.difficulty, quest.prefabs, quest.progress, quest.reward};
-
-        // Create an instance of the class of type quest the player chose and pass the parameters through
-        quest = (Quest)Activator.CreateInstance(questClassType, parameters);
     }
 
     // Updates the Text of the 3 scrolls so that the player can see what options to choose
     public void UpdateScrollText()
     {
-        // Find all objects with the tag "ScrollUI"
-        GameObject[] scrollUIs = GameObject.FindGameObjectsWithTag("ScrollUI");
+        string questName = levelOneQuests[questIndex].questName;
+        string questDescription = levelOneQuests[questIndex].description;
+        GameObject reward = levelOneQuests[questIndex].reward;
 
-        for (int i = 0; i < quests.Length; i++)
-        {
-            // Get the name and description of the objective
-            string questName = quests[i].questName;
-            string questDescription = quests[i].description;
-
-            // Set the text of the name and description UI elements
-            scrollUIs[i].transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
-            scrollUIs[i].transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
-        }
-
+        _questBoard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
+        _questBoard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
+        _questBoard.transform.Find("RewardImg").GetComponent<Image>().sprite = reward.GetComponent<SpriteRenderer>().sprite;
     }
 }

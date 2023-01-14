@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHasHealth
 {
+    private QuestManager questManager;
     public int startingHealth = 10;
-    public int CurrentHealth { get; set; }
+    public float MaxHealth { get; set; }
+    public float CurrentHealth { get; set; }
     private Material mat; 
 
     // Cache Variables
     private void Awake()
     {
+        questManager = QuestManager.instance;
         mat = GetComponent<Renderer>().material;
     }
 
@@ -29,7 +32,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     }
 
     // Deduct Health points
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
     }
@@ -37,6 +40,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     // On Object Death
     public void OnDeath(GameObject gameObject)
     {
+        questManager.currentQuest.UpdateQuestProgress(1);
         Destroy(gameObject);
     }
 }

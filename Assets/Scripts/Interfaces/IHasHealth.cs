@@ -3,7 +3,8 @@ using UnityEngine;
 
 interface IHasHealth
 {
-    int CurrentHealth { get; set; }
-    void TakeDamage(int damage);
+    float CurrentHealth { get; set; }
+    float MaxHealth { get; set; }
+    void TakeDamage(float damage);
     void OnDeath(GameObject gameObject);
 }

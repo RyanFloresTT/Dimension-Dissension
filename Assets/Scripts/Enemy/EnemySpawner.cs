@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemies(int maxEnemies, GameObject enemyPrefab )
     {
         // Keep spawning enemies as long as the number of enemies in the scene is less than the maximum
-        while (GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
+        for (int i = 0; i < maxEnemies ; i++)
         {
 
             // Find all the ground tiles in the scene
