@@ -8,12 +8,30 @@ public class RewardHandler : MonoBehaviour
     void OnEnable() { instance = this; }
     void OnDisable() { instance = null; }
 
-    private GameObject currentEquiped;
+    // Variables
+    [SerializeField] private GameObject _rewardMenu;
+    private PlayerArmorManager _playerArmorManager;
+    private ArmorBase _armorPiece;
 
     private void Start()
     {
-        currentEquiped = null;
+        _playerArmorManager = PlayerArmorManager.instance;
+        _rewardMenu.SetActive(false);
     }
 
-    public void HandleRewards(GameObject gameObject) { }    
+    public void HandleRewards(ArmorBase armor)
+    {
+        _rewardMenu.SetActive(true);
+        _armorPiece = armor;
+    }
+
+    public void AcceptReward()
+    {
+        _playerArmorManager.AddArmorPiece(_armorPiece);
+        _rewardMenu.SetActive(false);
+    }
+    public void DeclineReward()
+    {
+        _rewardMenu.SetActive(false);
+    }
 }

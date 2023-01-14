@@ -9,12 +9,12 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private GameObject _leftQuestButton;
     [SerializeField] private GameObject _rightQuestButton;
     [SerializeField] private GameObject _questBoard;
-    private int questIndex = 0;
-    private KillQuest[] levelOneQuests;
+    public int questIndex = 0;
+    public KillQuest[] levelOneQuests;
     public KillQuest currentQuest;
 
     // Singleton Setup
-    public static QuestManager   instance { get; private set; }
+    public static QuestManager instance { get; private set; }
     void OnEnable() { instance = this; }
     void OnDisable() { instance = null; }
 
@@ -98,10 +98,10 @@ public class QuestManager : MonoBehaviour
     {
         string questName = levelOneQuests[questIndex].questName;
         string questDescription = levelOneQuests[questIndex].description;
-        GameObject reward = levelOneQuests[questIndex].reward;
+        ArmorBase reward = levelOneQuests[questIndex].reward;
 
         _questBoard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
         _questBoard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
-        _questBoard.transform.Find("RewardImg").GetComponent<Image>().sprite = reward.GetComponent<SpriteRenderer>().sprite;
+        _questBoard.transform.Find("RewardImg").GetComponent<Image>().sprite = reward.sprite;
     }
 }

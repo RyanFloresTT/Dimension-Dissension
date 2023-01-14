@@ -32,8 +32,6 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     {
         MaxHealth = startingHealth;
         CurrentHealth = startingHealth;
-        ArmorBonus = 0;
-        AttackBonus = 0;
         UpdateHealthUI();
     }
 

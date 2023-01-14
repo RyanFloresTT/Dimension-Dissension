@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d18913c344c2f8409be44df89203ce0, type: 3}
   m_Name: HandleIt
   m_EditorClassIdentifier: 
-  questName: HandleIt
+  questName: Handle It!
   description: Kill Enemies.
   _difficulty: 0
   _prefabs:
   - {fileID: 4441000244151731676, guid: deb0c6688719c6f48a0821cb8410211b, type: 3}
   - {fileID: 4441000244151731676, guid: 4d34e61cb2f10b641b6bef9afa77381f, type: 3}
   _requirement: 5
-  reward: {fileID: 5417117636761774963, guid: 9ba06d0c684554141bbabe732380a6b7, type: 3}
+  reward: {fileID: 11400000, guid: f5da7073c9dfd5248ac639cbf16d53fc, type: 2}
