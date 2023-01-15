@@ -13,8 +13,7 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     public float CurrentHealth { get; set; }
     [SerializeField] private float _armorMultiplier;
     [SerializeField] public float _damageMultiplier;
-    private Canvas _canvas;
-    private TextMeshProUGUI _healthText;
+    [SerializeField] private HealthBar _healthBar;
 
     // Singleton Setup
     public static Player instance { get; private set; }
@@ -23,8 +22,6 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
 
     private void Awake()
     {
-        _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        _healthText = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -33,8 +30,8 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     private void Start()
     {
         MaxHealth = startingHealth;
-        CurrentHealth = startingHealth;
-        UpdateHealthUI();
+        CurrentHealth = MaxHealth;
+        _healthBar.SetMaxHealth(MaxHealth);
     }
 
     private void Update()
@@ -44,19 +41,13 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
             OnDeath(gameObject);
         }
     }
-    
-    // Updates The UI to show Current Health
-    private void UpdateHealthUI()
-    {
-        _healthText.text = ("Health: " + CurrentHealth);
-    }
 
     // Deduct Health Points
     public void TakeDamage(float damage)
     {
         float updatedDamage = damage - (ArmorBonus * _armorMultiplier);
         CurrentHealth -= updatedDamage;
-        UpdateHealthUI();
+        _healthBar.SetHelth(CurrentHealth);
     }
     // On Player Death
     public void OnDeath(GameObject gameObject)

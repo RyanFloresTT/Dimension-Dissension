@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     // The public instance of the EnemySpawner
     public static EnemySpawner instance;
+    [SerializeField] private GameObject[] enemySpawnPoints;
 
     private void Awake()
     {
@@ -18,13 +19,9 @@ public class EnemySpawner : MonoBehaviour
         // Keep spawning enemies as long as the number of enemies in the scene is less than the maximum
         for (int i = 0; i < maxEnemies ; i++)
         {
-
-            // Find all the ground tiles in the scene
-            GameObject[] groundTiles = GameObject.FindGameObjectsWithTag("EnemySpawn");
-
             // Choose a random ground tile
-            int randomIndex = Random.Range(0, groundTiles.Length);
-            GameObject groundTile = groundTiles[randomIndex];
+            int randomIndex = Random.Range(0, enemySpawnPoints.Length);
+            GameObject groundTile = enemySpawnPoints[randomIndex];
 
             // Get the position of the ground tile
             Vector3 spawnPosition = new Vector3(groundTile.transform.position.x, groundTile.transform.position.y, 0);

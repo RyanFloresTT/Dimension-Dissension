@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6df47beca65164a854adbe4dc20231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
-  chasing: 0
+  _speed: 7
+  chasing: 1
   _attackRange: 1
 --- !u!114 &8060510518976443219
 MonoBehaviour:
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91dae310bbcee134cab4acb17503d6ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1
+  startingHealth: 2
 --- !u!114 &7334201867088210091
 MonoBehaviour:
   m_ObjectHideFlags: 0

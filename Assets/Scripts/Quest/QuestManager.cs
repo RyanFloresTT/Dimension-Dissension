@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _healthText;
+    [SerializeField] private GameObject _healthBar;
     [SerializeField] private GameObject _questGroup;
     [SerializeField] private GameObject _leftQuestButton;
     [SerializeField] private GameObject _rightQuestButton;
@@ -32,7 +32,7 @@ public class QuestManager : MonoBehaviour
         _questGroup.SetActive(true);
         questIndex = 0;
         currentQuest = null;
-        _healthText.SetActive(false);
+        _healthBar.SetActive(false);
         Time.timeScale = 0;
         PopulateQuestList();
         UpdateScrollText();
@@ -98,7 +98,7 @@ public class QuestManager : MonoBehaviour
     {
         // Puts time back to normal and toggles active states of UI elements
         Time.timeScale = 1;
-        _healthText.SetActive(true);
+        _healthBar.SetActive(true);
         _questGroup.SetActive(false);
         currentQuest.StartQuest();
 
