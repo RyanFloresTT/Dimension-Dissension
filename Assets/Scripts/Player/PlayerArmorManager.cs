@@ -44,14 +44,7 @@ public class PlayerArmorManager : MonoBehaviour
     
     public void AddArmorPiece(ArmorBase armor)
     {
-        if (armorList.Count == 0)
-        {
-            armorList.Add(armor);
-        }
-        else
-        {
-            
-        }
+        armorList.Add(armor);
         AddArmorStats();
     }
 }

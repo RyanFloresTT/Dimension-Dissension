@@ -25,6 +25,8 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     {
         _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         _healthText = GameObject.Find("HealthText").GetComponent<TextMeshProUGUI>();
+        instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update

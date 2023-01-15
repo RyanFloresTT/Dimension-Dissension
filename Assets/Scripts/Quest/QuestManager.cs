@@ -1,5 +1,7 @@
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuestManager : MonoBehaviour
@@ -9,7 +11,7 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private GameObject _leftQuestButton;
     [SerializeField] private GameObject _rightQuestButton;
     [SerializeField] private GameObject _questBoard;
-    public int questIndex = 0;
+    public int questIndex;
     public KillQuest[] levelOneQuests;
     public KillQuest currentQuest;
 
@@ -18,10 +20,17 @@ public class QuestManager : MonoBehaviour
     void OnEnable() { instance = this; }
     void OnDisable() { instance = null; }
 
-
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        InitiallizeQuest();
+    }
+
+    public void InitiallizeQuest()
+    {
+        Debug.Log("Init");
+        _questGroup.SetActive(true);
+        questIndex = 0;
         currentQuest = null;
         _healthText.SetActive(false);
         Time.timeScale = 0;
@@ -29,15 +38,12 @@ public class QuestManager : MonoBehaviour
         UpdateScrollText();
 
         _leftQuestButton.SetActive(false);
-    }
-
-    private void Update()
-    {
-        
+        _rightQuestButton.SetActive(true);
     }
 
     private void PopulateQuestList()
     {
+        Array.Clear(levelOneQuests, 0, levelOneQuests.Length);
         levelOneQuests = Resources.LoadAll<KillQuest>("LevelOneQuests");
     }
 

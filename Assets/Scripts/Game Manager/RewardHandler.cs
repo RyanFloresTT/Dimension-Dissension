@@ -13,30 +13,34 @@ public class RewardHandler : MonoBehaviour
     private PlayerArmorManager _playerArmorManager;
     private QuestManager _questManager;
     private ArmorBase _armorPiece;
+    private GameManager _gameManager;
 
     private void Start()
     {
         _questManager = QuestManager.instance;
         _playerArmorManager = PlayerArmorManager.instance;
         _rewardMenu.SetActive(false);
+        _gameManager = GameManager.instance;
     }
 
     public void HandleRewards(ArmorBase armor)
     {
-        _rewardMenu.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = _questManager.levelOneQuests[_questManager.questIndex].reward.armorName;
-        _rewardMenu.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.attackRating;
-        _rewardMenu.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + _questManager.levelOneQuests[_questManager.questIndex].reward.armorRating;
-        _rewardMenu.SetActive(true);
         _armorPiece = armor;
+        _rewardMenu.transform.Find("RewardName").GetComponent<TMPro.TextMeshProUGUI>().text = _armorPiece.armorName;
+        _rewardMenu.transform.Find("AttackRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Attack: +" + _armorPiece.attackRating;
+        _rewardMenu.transform.Find("ArmorRating").GetComponent<TMPro.TextMeshProUGUI>().text = "Armor: +" + _armorPiece.armorRating;
+        _rewardMenu.SetActive(true);
     }
 
     public void AcceptReward()
     {
         _playerArmorManager.AddArmorPiece(_armorPiece);
         _rewardMenu.SetActive(false);
+        StartCoroutine(_gameManager.LoadNextLevel(3));
     }
     public void DeclineReward()
     {
         _rewardMenu.SetActive(false);
+        StartCoroutine(_gameManager.LoadNextLevel(3));
     }
 }
