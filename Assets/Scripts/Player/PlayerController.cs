@@ -39,6 +39,6 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
 
         // Move the player in the calculated direction
-        transform.position += direction * movementSpeed * Time.deltaTime;
+        transform.position += direction * (movementSpeed * Time.deltaTime);
     }
 }
