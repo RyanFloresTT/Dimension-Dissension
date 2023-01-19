@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class Player : MonoBehaviour, IHasHealth, IHasStats
 {
@@ -45,10 +41,12 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     // Deduct Health Points
     public void TakeDamage(float damage)
     {
-        float updatedDamage = damage - (ArmorBonus * _armorMultiplier);
+        float updatedDamage = damage - ((ArmorBonus * _armorMultiplier) / 100); 
         CurrentHealth -= updatedDamage;
+        Debug.Log("Player took :" + updatedDamage + " damage.");
         _healthBar.SetHelth(CurrentHealth);
     }
+    
     // On Player Death
     public void OnDeath(GameObject gameObject)
     {
