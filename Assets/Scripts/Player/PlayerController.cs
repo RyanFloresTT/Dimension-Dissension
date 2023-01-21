@@ -8,13 +8,16 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private bool facingLeft = false;
+    private Player _player;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        _player = Player.instance;
     }
 
     void Update()
     {
+        if (!_player.IsAlive) return;
         // Get input for the horizontal and vertical axes
         float horizontalInput = 0;
         float verticalInput = 0;

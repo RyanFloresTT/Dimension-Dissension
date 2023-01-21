@@ -1,4 +1,7 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IHasHealth, IHasStats
 {
@@ -10,6 +13,11 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     [SerializeField] private float _armorMultiplier;
     [SerializeField] public float _damageMultiplier;
     [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private Material playerMaterial;
+    [SerializeField] private int zoomDelay = 2;
+    [SerializeField] private float zoomSpeed = .1f;
+    public bool IsAlive = true;
+    private bool _deathZoomEnabled = false;
 
     // Singleton Setup
     public static Player instance { get; private set; }
@@ -19,7 +27,6 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     private void Awake()
     {
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -28,13 +35,19 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
         MaxHealth = startingHealth;
         CurrentHealth = MaxHealth;
         _healthBar.SetMaxHealth(MaxHealth);
+        CleanShaderProperties();
     }
 
     private void Update()
     {
         if (CurrentHealth <= 0)
         {
-            OnDeath(gameObject);
+            OnDeath();
+        }
+
+        if (_deathZoomEnabled)  
+        {
+            Camera.main.orthographicSize -= zoomSpeed * Time.deltaTime;
         }
     }
 
@@ -48,8 +61,35 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     }
     
     // On Player Death
-    public void OnDeath(GameObject gameObject)
+    public void OnDeath()
     {
-        Destroy(gameObject);
+        IsAlive = false;
+        PlayDeathAnimation();
+        StartCoroutine(TriggerDeathZoom());
+        
+    }
+
+    private IEnumerator TriggerDeathZoom()
+    {
+        _deathZoomEnabled = true;
+        yield return new WaitForSeconds(zoomDelay);
+        LoadGameOver();
+    }
+
+    private void PlayDeathAnimation()
+    {
+        playerMaterial.SetFloat("_InnerOutlineAlpha", 1f);
+        playerMaterial.SetFloat("_GlitchAmount", 3f);
+    }
+
+    private void LoadGameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
+
+    private void CleanShaderProperties()
+    {
+        playerMaterial.SetFloat("_InnerOutlineAlpha", 0f);
+        playerMaterial.SetFloat("_GlitchAmount", 0f);
     }
 }

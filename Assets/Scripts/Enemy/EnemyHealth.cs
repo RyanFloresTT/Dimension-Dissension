@@ -27,7 +27,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     {
         if (CurrentHealth <= 0)
         {
-            OnDeath(gameObject);
+            OnDeath();
         }
     }
 
@@ -38,7 +38,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     }
 
     // On Object Death
-    public void OnDeath(GameObject gameObject)
+    public void OnDeath()
     {
         questManager.currentQuest.UpdateQuestProgress(1);
         Destroy(gameObject);

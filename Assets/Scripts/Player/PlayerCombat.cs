@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,18 @@ public class PlayerCombat : MonoBehaviour
     public float attackDelay = 1.0f;
     public float projectileSpeed = 5.0f;
     public GameObject projPrefab;
+    private Player _player;
+
+    private void Start()
+    {
+        _player = Player.instance;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        
+        if (!_player.IsAlive) return;
         // Check if the player is holding down the attack button
         if (Input.GetButton("Fire1"))
         {
