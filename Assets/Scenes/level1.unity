@@ -24652,6 +24652,18 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7361031088626937921, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: volumeLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361031088626937922, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: priority
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361031088626937922, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 50620efb225d7084aade03aad554985a, type: 2}
     - target: {fileID: 7361031089348848618, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
       propertyPath: _healthBar
       value: 
@@ -24702,6 +24714,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7577593957954630415, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577593958116743027, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: m_HDR
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577593958116743027, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: m_AllowMSAA
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7577593958116743027, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: m_AllowDynamicResolution
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -25063,6 +25087,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7577593957954630412, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
   m_PrefabInstance: {fileID: 1511180889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2000699950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000699940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005aec9222adbcc4d9082fd9e078e4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1304f82fd89c653489457f790f642d90, type: 2}
+  strength: 16
+  delay: 0.15
 --- !u!1 &2058887637
 GameObject:
   m_ObjectHideFlags: 0

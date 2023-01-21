@@ -5,22 +5,27 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 1f;
-    public bool chasing = false;
     [SerializeField] private float _attackRange = 1f;
     private GameObject _player;
     private SpriteRenderer _spriteRenderer;
+    private EnemyHealth _enemyHealth;
+    private bool _isAlive;
 
     // Cache variables
     private void Awake() 
     {
         _player = GameObject.FindGameObjectWithTag("Player");
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _enemyHealth = GetComponent<EnemyHealth>();
+
     }
 
     // Update is called once per frame
     private void Update()
-    {        
-        if (chasing) 
+    {
+        _isAlive = _enemyHealth.IsAlive;
+        
+        if (_isAlive) 
         {
             // Calculate the distance between the enemy and the player
             float distance = Vector2.Distance(transform.position, _player.transform.position);
