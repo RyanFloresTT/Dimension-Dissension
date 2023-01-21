@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHasHealth
 {
-    private QuestManager questManager;
+    private QuestManager _questManager;
+    private Animator _animator;
     public int startingHealth = 10;
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
+    public bool IsAlive = true;
+    [SerializeField] private float deathDelay = .5f;
 
     // Cache Variables
     private void Awake()
     {
-        questManager = QuestManager.instance;
+        _animator = GetComponent<Animator>();
+        _questManager = QuestManager.instance;
     }
 
     // Config Variables
@@ -21,24 +25,22 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
         CurrentHealth = startingHealth;
     }
 
-    void Update()
+    // Deduct Health points
+    public void TakeDamage(float damage)
     {
+        CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
             OnDeath();
         }
     }
 
-    // Deduct Health points
-    public void TakeDamage(float damage)
-    {
-        CurrentHealth -= damage;
-    }
-
     // On Object Death
     public void OnDeath()
     {
-        questManager.currentQuest.UpdateQuestProgress(1);
-        Destroy(gameObject);
+        IsAlive = false;
+        _questManager.currentQuest.UpdateQuestProgress(1);
+        _animator.SetTrigger("Die");
+        Destroy(gameObject, deathDelay);
     }
 }
