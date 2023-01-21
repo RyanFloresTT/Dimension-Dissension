@@ -37,12 +37,11 @@ public class PlayerProjectile : MonoBehaviour, IIsProjectile
         
         // Check if the projectile hits something with health that is NOT the player.
         if (health != null && player == null)
-        {   
-            // tell the enemy they were hit, so they can chase the player
-            other.GetComponent<EnemyMovement>().chasing = true;
-
+        {
             // Deal damage to the enemy
             other.GetComponent<IHasHealth>().TakeDamage(Damage);
+            
+            other.GetComponent<KnockbackFeedback>().PlayFeedback(gameObject);
 
             // Destroy the arcane bolts
             Destroy(gameObject);

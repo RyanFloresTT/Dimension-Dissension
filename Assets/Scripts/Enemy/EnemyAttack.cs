@@ -6,12 +6,13 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private int attackDamage = 1;
-    [SerializeField] private GameObject playerGameObject;
     private Player _player;
+    private KnockbackFeedback _playerKnockback;
 
     private void Start()
     {
         _player = Player.instance;
+        _playerKnockback = _player.gameObject.GetComponent<KnockbackFeedback>();
     }
 
     // On Trigger Enter, Make the Player take damage.
@@ -20,8 +21,9 @@ public class EnemyAttack : MonoBehaviour
         Player isPlayer = collision.GetComponent<Player>();
 
         if (isPlayer)
-        { 
+        {
             _player.TakeDamage(attackDamage);
+            _playerKnockback.PlayFeedback(gameObject);
         }
     }
 }
