@@ -8,13 +8,11 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     public int startingHealth = 10;
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
-    private Material mat; 
 
     // Cache Variables
     private void Awake()
     {
         questManager = QuestManager.instance;
-        mat = GetComponent<Renderer>().material;
     }
 
     // Config Variables
