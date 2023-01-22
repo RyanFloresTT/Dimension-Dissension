@@ -14,12 +14,14 @@ public class QuestBase : ScriptableObject
     // Class Variables
     private EnemySpawner _enemySpawner;
     private GameObject _enemyPrefab;
+    private LevelManager _levelManager;
 
     public void StartQuest()
     {
         _enemySpawner = FindObjectOfType<EnemySpawner>();
         _enemyPrefab = ChooseRandomEnemy(_prefabs);
         SpawnQuestEntities(_enemyPrefab);
+        _levelManager = LevelManager.instance;
     }
 
     public void UpdateQuestProgress(int updatedProgress)
@@ -30,12 +32,14 @@ public class QuestBase : ScriptableObject
             CompleteQuest();
     }
 
-    public void CompleteQuest()
+    private void CompleteQuest()
     {
         Debug.Log("Quest Completed");
+        _levelManager.NextLevel();
+        Debug.Log(_levelManager.GetLevel());
     }
 
-    public void SpawnQuestEntities(GameObject entity)
+    private void SpawnQuestEntities(GameObject entity)
     {
         _enemySpawner.SpawnEnemies(_requirement, entity);
     }

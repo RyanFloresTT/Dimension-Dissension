@@ -48,21 +48,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // Sets the current objective to the first set objective
-    public void OnObjective1ButtonClicked()
-    {
-        currentQuest = levelOneQuests[questIndex];
-        StartQuest();
-    }
-    
-    // Sets the current objective to the second set objective
-    public void OnObjective2ButtonClicked()
-    {
-        currentQuest = levelOneQuests[questIndex];
-        StartQuest();
-    }
-    
-    // Sets the current objective to the third set objective
-    public void OnObjective3ButtonClicked()
+    public void OnQuestAccept()
     {
         currentQuest = levelOneQuests[questIndex];
         StartQuest();

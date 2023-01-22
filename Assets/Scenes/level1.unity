@@ -24577,6 +24577,11 @@ Transform:
   m_Father: {fileID: 757473712}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1377528550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5021902541402390055, guid: edd0a8382c4929d47a9e3c61e69046a7, type: 3}
+  m_PrefabInstance: {fileID: 5021902542826228133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392333337
 GameObject:
   m_ObjectHideFlags: 0
@@ -25169,7 +25174,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5021902541402390051, guid: edd0a8382c4929d47a9e3c61e69046a7, type: 3}
   m_PrefabInstance: {fileID: 5021902542826228133}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1377528550}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99b5c91d3c568bc4db827eb3482bb90f, type: 3}
@@ -25180,10 +25185,22 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5021902541402390061, guid: edd0a8382c4929d47a9e3c61e69046a7, type: 3}
   m_PrefabInstance: {fileID: 5021902542826228133}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1377528550}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2ccaed7fb71cbb64f8b1eefb269d1f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2099410830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377528550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762219c27d7fd8c47949cba5c91ac454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2113287965
@@ -25524,6 +25541,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2099410822}
+    - target: {fileID: 7090652019559207154, guid: f205aabe658ad2249837b0b7909fa5a4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnQuestAccept
+      objectReference: {fileID: 0}
     - target: {fileID: 7090652020024366470, guid: f205aabe658ad2249837b0b7909fa5a4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
