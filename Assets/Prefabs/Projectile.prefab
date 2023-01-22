@@ -141,7 +141,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ea6b085511bac6c44b2fe34cb2adee09, type: 2}
+  - {fileID: 2100000, guid: bcdeeb76002144b49888f21778f5dec5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,7 +236,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   owner: {fileID: 0}
   speed: 1
-  _damageModifier: 1
+  _damageMultiplier: 0
 --- !u!114 &2654994434821532294
 MonoBehaviour:
   m_ObjectHideFlags: 0
