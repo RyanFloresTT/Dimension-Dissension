@@ -9,7 +9,7 @@ More screenshots to come!
 
 ## Built With
 
-* [Unity](www.unity.com)
+* [Unity](https://www.unity.com)
 
 ## Game Design
 
