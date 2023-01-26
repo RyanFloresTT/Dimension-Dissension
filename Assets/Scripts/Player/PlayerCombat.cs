@@ -10,7 +10,8 @@ public class PlayerCombat : MonoBehaviour
     public float projectileSpeed = 5.0f;
     public GameObject projPrefab;
     private Player _player;
-
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip fireProjectileClip;
     private void Start()
     {
         _player = Player.instance;
@@ -44,6 +45,8 @@ public class PlayerCombat : MonoBehaviour
     // Shoot the projectile at the cursor location, rotating the sprite to point towards it as well.
     void Attack(Vector3 direction)
     {
+        PlayAttackAudio();
+        
         // Create a projectile game object
         GameObject projectile = Instantiate(projPrefab, transform.position, Quaternion.identity);
 
@@ -64,5 +67,10 @@ public class PlayerCombat : MonoBehaviour
 
         // Destroy Projectile after 2 seconds
         Destroy(projectile, 2);
+    }
+
+    private void PlayAttackAudio()
+    {
+        audioSource.PlayOneShot(fireProjectileClip);
     }
 }

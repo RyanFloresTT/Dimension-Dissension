@@ -80,7 +80,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // Puts the game back into play and starts the quest
-    public void StartQuest()
+    private void StartQuest()
     {
         // Puts time back to normal and toggles active states of UI elements
         Time.timeScale = 1;
@@ -91,7 +91,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // Updates the Text of the 3 scrolls so that the player can see what options to choose
-    public void UpdateScrollText()
+    private void UpdateScrollText()
     {
         string questName = levelOneQuests[questIndex].questName;
         string questDescription = levelOneQuests[questIndex].description;
