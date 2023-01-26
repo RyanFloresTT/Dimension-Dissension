@@ -11,12 +11,15 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     public float CurrentHealth { get; set; }
     public bool IsAlive = true;
     [SerializeField] private float deathDelay = .5f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip onHitClip;
 
     // Cache Variables
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _questManager = QuestManager.instance;
+        audioSource = FindObjectOfType<AudioSource>();
     }
 
     // Config Variables
@@ -29,6 +32,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     public void TakeDamage(float damage)
     {
         CurrentHealth -= damage;
+        audioSource.PlayOneShot(onHitClip);
         if (CurrentHealth <= 0)
         {
             OnDeath();

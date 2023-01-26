@@ -131,7 +131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 7
-  chasing: 1
   _attackRange: 1
 --- !u!114 &8060510518976443219
 MonoBehaviour:
@@ -159,6 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 2
+  IsAlive: 1
+  deathDelay: 0.5
+  audioSource: {fileID: 0}
+  onHitClip: {fileID: 8300000, guid: e81aa5813f6c50a459733a10eeccc30c, type: 3}
 --- !u!114 &7334201867088210091
 MonoBehaviour:
   m_ObjectHideFlags: 0

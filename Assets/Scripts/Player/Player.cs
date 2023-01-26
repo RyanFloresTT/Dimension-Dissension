@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IHasHealth, IHasStats
@@ -16,8 +18,14 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     [SerializeField] private Material playerMaterial;
     [SerializeField] private int zoomDelay = 2;
     [SerializeField] private float zoomSpeed = .1f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip onHitClip;
     public bool IsAlive = true;
     private bool _deathZoomEnabled = false;
+    private readonly string _shaderInnerOutline = "_InnerOutlineAlpha";
+    private readonly string _shaderGlitch = "_GlitchAmount";
+    private Camera _mainCamera;
 
     // Singleton Setup
     public static Player instance { get; private set; }
@@ -27,6 +35,8 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     private void Awake()
     {
         instance = this;
+        CleanShaderProperties();
+        _mainCamera = Camera.main;
     }
 
     // Start is called before the first frame update
@@ -35,19 +45,19 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
         MaxHealth = startingHealth;
         CurrentHealth = MaxHealth;
         _healthBar.SetMaxHealth(MaxHealth);
-        CleanShaderProperties();
     }
 
     private void Update()
     {
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= 0 && IsAlive)
         {
             OnDeath();
+            PlayDeathAnimation();
         }
 
         if (_deathZoomEnabled)  
         {
-            Camera.main.orthographicSize -= zoomSpeed * Time.deltaTime;
+            _mainCamera.orthographicSize -= zoomSpeed * Time.deltaTime;
         }
     }
 
@@ -56,6 +66,7 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     {
         float updatedDamage = damage - ((ArmorBonus * _armorMultiplier) / 100); 
         CurrentHealth -= updatedDamage;
+        audioSource.PlayOneShot(onHitClip);
         Debug.Log("Player took :" + updatedDamage + " damage.");
         _healthBar.SetHelth(CurrentHealth);
     }
@@ -64,9 +75,8 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     public void OnDeath()
     {
         IsAlive = false;
-        PlayDeathAnimation();
+        audioSource.PlayOneShot(deathClip);
         StartCoroutine(TriggerDeathZoom());
-        
     }
 
     private IEnumerator TriggerDeathZoom()
@@ -78,8 +88,8 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
 
     private void PlayDeathAnimation()
     {
-        playerMaterial.SetFloat("_InnerOutlineAlpha", 1f);
-        playerMaterial.SetFloat("_GlitchAmount", 3f);
+        playerMaterial.SetFloat(_shaderInnerOutline, 1f);
+        playerMaterial.SetFloat(_shaderGlitch, 3f);
     }
 
     private void LoadGameOver()
@@ -89,7 +99,7 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
 
     private void CleanShaderProperties()
     {
-        playerMaterial.SetFloat("_InnerOutlineAlpha", 0f);
-        playerMaterial.SetFloat("_GlitchAmount", 0f);
+        playerMaterial.SetFloat(_shaderInnerOutline, 0f);
+        playerMaterial.SetFloat(_shaderGlitch, 0f);
     }
 }

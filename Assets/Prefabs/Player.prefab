@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7361031089348848618}
   - component: {fileID: 1058376544}
   - component: {fileID: 2000699941}
+  - component: {fileID: 2000699950}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -168,6 +169,8 @@ MonoBehaviour:
   attackDelay: 1
   projectileSpeed: 10
   projPrefab: {fileID: 4816823719059332998, guid: d4c0fdc8e43052147bf73b7f0693152d, type: 3}
+  audioSource: {fileID: 0}
+  fireProjectileClip: {fileID: 8300000, guid: 5ec483be816dcae4bb8047396fae4a02, type: 3}
 --- !u!114 &7361031089348848618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +190,9 @@ MonoBehaviour:
   playerMaterial: {fileID: 2100000, guid: 1304f82fd89c653489457f790f642d90, type: 2}
   zoomDelay: 2
   zoomSpeed: 2
+  audioSource: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: 487269cf3bdff0a4aafa0504f2ec8f18, type: 3}
+  onHitClip: {fileID: 8300000, guid: fd4b5eef59b993d46b54329f1e4b65db, type: 3}
   IsAlive: 1
 --- !u!114 &1058376544
 MonoBehaviour:
@@ -217,6 +223,21 @@ MonoBehaviour:
   normalStrength: 5
   normalSmoothing: 1
   computingNormal: 0
+--- !u!114 &2000699950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577593957954630412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005aec9222adbcc4d9082fd9e078e4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 1304f82fd89c653489457f790f642d90, type: 2}
+  strength: 16
+  delay: 0.15
 --- !u!1 &7577593958116743024
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 0}
+  sharedProfile: {fileID: 11400000, guid: 50620efb225d7084aade03aad554985a, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
