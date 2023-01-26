@@ -3,6 +3,7 @@
 - This game takes you through multiple dimemsions to help get rid of creatures that have been taking over that area. You are given multiple quests to choose from each time you enter a dimension. You can choose one, but be careful, the better the item, the harder the quest will be. The fourth dimension you visit will be a boss fight and the end of the game for now.
 
 [Click here to play the current demo build!](https://ryanflorestt.github.io/Dimension-Dissension/)
+*Please play in fullscreen if possible.*
 
 ## Screenshots
 ![mainmenu](https://user-images.githubusercontent.com/53247675/213339033-7db54dcf-87d9-4a1d-9a55-3bf8990622ce.PNG)
