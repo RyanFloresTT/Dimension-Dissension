@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance { get; private set; }
     void OnEnable() { instance = this; }
     void OnDisable() { instance = null; }
-    
+
     private int _level = 1;
 
     public int GetLevel()
