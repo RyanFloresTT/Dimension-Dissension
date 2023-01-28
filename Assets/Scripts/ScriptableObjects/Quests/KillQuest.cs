@@ -39,9 +39,7 @@ public class KillQuest : ScriptableObject
     private void CompleteQuest()    
     {
         _rewardHandler.HandleRewards(reward);
-        Debug.Log("Quest Completed");
         _levelManager.NextLevel();
-        Debug.Log(_levelManager.GetLevel());
     }
 
     private void SpawnQuestEntities(GameObject entity)

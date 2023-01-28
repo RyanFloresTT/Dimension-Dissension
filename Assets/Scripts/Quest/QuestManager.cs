@@ -28,7 +28,6 @@ public class QuestManager : MonoBehaviour
 
     public void InitiallizeQuest()
     {
-        Debug.Log("Init");
         _questGroup.SetActive(true);
         questIndex = 0;
         currentQuest = null;

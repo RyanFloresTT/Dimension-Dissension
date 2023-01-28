@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private QuestManager questManager;
 
-
     private void Awake()
     {
         instance = this;

@@ -14,6 +14,8 @@ public class RewardHandler : MonoBehaviour
     private QuestManager _questManager;
     private ArmorBase _armorPiece;
     private GameManager _gameManager;
+    [SerializeField] private float levelLoadDelay = 3f;
+    [SerializeField] private Animator transitionAnimator;
 
     private void Start()
     {
@@ -36,11 +38,12 @@ public class RewardHandler : MonoBehaviour
     {
         _playerArmorManager.AddArmorPiece(_armorPiece);
         _rewardMenu.SetActive(false);
-        StartCoroutine(_gameManager.LoadNextLevel(3));
+        transitionAnimator.SetTrigger("Start");
+        StartCoroutine(_gameManager.LoadNextLevel(levelLoadDelay));
     }
     public void DeclineReward()
     {
         _rewardMenu.SetActive(false);
-        StartCoroutine(_gameManager.LoadNextLevel(3));
+        StartCoroutine(_gameManager.LoadNextLevel(levelLoadDelay));
     }
 }
