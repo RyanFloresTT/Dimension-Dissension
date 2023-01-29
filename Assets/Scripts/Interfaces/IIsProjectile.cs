@@ -1,5 +1,4 @@
-﻿
-interface IIsProjectile
+﻿interface IIsProjectile
 {
     float Damage { get; set; }
 }

@@ -1,6 +1,3 @@
-
-using UnityEngine;
-
 interface IHasHealth
 {
     float CurrentHealth { get; set; }

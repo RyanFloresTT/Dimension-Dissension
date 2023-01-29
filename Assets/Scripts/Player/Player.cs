@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IHasHealth, IHasStats
 {
@@ -12,29 +9,29 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     public float AttackBonus { get; set; } 
     public float ArmorBonus { get; set; }
     public float CurrentHealth { get; set; }
-    [SerializeField] private float _armorMultiplier;
-    [SerializeField] public float _damageMultiplier;
-    [SerializeField] private HealthBar _healthBar;
+    [SerializeField] private float armorMultiplier;
+    [SerializeField] public float damageMultiplier;
+    [SerializeField] private HealthBar healthBar;
     [SerializeField] private Material playerMaterial;
     [SerializeField] private int zoomDelay = 2;
     [SerializeField] private float zoomSpeed = .1f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip deathClip;
     [SerializeField] private AudioClip onHitClip;
-    public bool IsAlive = true;
+    public bool isAlive = true;
     private bool _deathZoomEnabled = false;
-    private readonly string _shaderInnerOutline = "_InnerOutlineAlpha";
-    private readonly string _shaderGlitch = "_GlitchAmount";
+    private const string ShaderInnerOutline = "_InnerOutlineAlpha";
+    private const string ShaderGlitch = "_GlitchAmount";
     private Camera _mainCamera;
 
     // Singleton Setup
-    public static Player instance { get; private set; }
-    void OnEnable() { instance = this; }
-    void OnDisable() { instance = null; }
+    public static Player Instance { get; private set; }
+    private void OnEnable() { Instance = this; }
+    private void OnDisable() { Instance = null; }
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
         CleanShaderProperties();
         _mainCamera = Camera.main;
     }
@@ -44,12 +41,12 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     {
         MaxHealth = startingHealth;
         CurrentHealth = MaxHealth;
-        _healthBar.SetMaxHealth(MaxHealth);
+        healthBar.SetMaxHealth(MaxHealth);
     }
 
     private void Update()
     {
-        if (CurrentHealth <= 0 && IsAlive)
+        if (CurrentHealth <= 0 && isAlive)
         {
             OnDeath();
             PlayDeathAnimation();
@@ -64,17 +61,17 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
     // Deduct Health Points
     public void TakeDamage(float damage)
     {
-        float updatedDamage = damage - ((ArmorBonus * _armorMultiplier) / 100); 
+        var updatedDamage = damage - ((ArmorBonus * armorMultiplier) / 100); 
         CurrentHealth -= updatedDamage;
         audioSource.PlayOneShot(onHitClip);
         Debug.Log("Player took :" + updatedDamage + " damage.");
-        _healthBar.SetHelth(CurrentHealth);
+        healthBar.SetHealth(CurrentHealth);
     }
     
     // On Player Death
     public void OnDeath()
     {
-        IsAlive = false;
+        isAlive = false;
         audioSource.PlayOneShot(deathClip);
         StartCoroutine(TriggerDeathZoom());
     }
@@ -88,18 +85,18 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
 
     private void PlayDeathAnimation()
     {
-        playerMaterial.SetFloat(_shaderInnerOutline, 1f);
-        playerMaterial.SetFloat(_shaderGlitch, 3f);
+        playerMaterial.SetFloat(ShaderInnerOutline, 1f);
+        playerMaterial.SetFloat(ShaderGlitch, 3f);
     }
 
-    private void LoadGameOver()
+    private static void LoadGameOver()
     {
         SceneManager.LoadScene("GameOver");
     }
 
     private void CleanShaderProperties()
     {
-        playerMaterial.SetFloat(_shaderInnerOutline, 0f);
-        playerMaterial.SetFloat(_shaderGlitch, 0f);
+        playerMaterial.SetFloat(ShaderInnerOutline, 0f);
+        playerMaterial.SetFloat(ShaderGlitch, 0f);
     }
 }

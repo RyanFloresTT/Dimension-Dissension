@@ -1,24 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public float movementSpeed = 5.0f;
 
-    private SpriteRenderer spriteRenderer;
-    private bool facingLeft = false;
+    private SpriteRenderer _spriteRenderer;
+    private bool _facingLeft = false;
     private Player _player;
-    void Start()
+
+    private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        _player = Player.instance;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _player = Player.Instance;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!_player.IsAlive) return;
-        // Get input for the horizontal and vertical axes
+        if (!_player.isAlive) return;
         float horizontalInput = 0;
         float verticalInput = 0;
         if (Input.GetKey(KeyCode.A)) horizontalInput = -1;
@@ -26,22 +24,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W)) verticalInput = 1;
         if (Input.GetKey(KeyCode.S)) verticalInput = -1;
 
-        if (horizontalInput < 0 && !facingLeft)
+        switch (horizontalInput)
         {
-            spriteRenderer.flipX = true;
-            facingLeft = true;
+            case < 0 when !_facingLeft:
+                _spriteRenderer.flipX = true;
+                _facingLeft = true;
+                break;
+            case > 0 when _facingLeft:
+                _spriteRenderer.flipX = false;
+                _facingLeft = false;
+                break;
         }
-        // Reset the flip if the player starts moving right
-        else if (horizontalInput > 0 && facingLeft)
-        {
-            spriteRenderer.flipX = false;
-            facingLeft = false;
-        }
+        var direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
 
-        // Calculate the direction the player should move in
-        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0).normalized;
-
-        // Move the player in the calculated direction
         transform.position += direction * (movementSpeed * Time.deltaTime);
     }
 }

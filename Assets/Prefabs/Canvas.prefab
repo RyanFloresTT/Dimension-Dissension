@@ -86,9 +86,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25309156}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!95 &25309158
 Animator:
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62773b0126620ae4f8396d512751ee5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 945487736}
+  slider: {fileID: 945487736}
 --- !u!1 &1788262090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,8 +1078,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acfdecb072149e24f9b416a1e08e1d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRatingText: {fileID: 7090652019732830781}
-  _armorRatingText: {fileID: 7090652019837297567}
+  attackRatingText: {fileID: 7090652019732830781}
+  armorRatingText: {fileID: 7090652019837297567}
 --- !u!1 &7090652019305251706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 7090652019353576200}
   - component: {fileID: 7090652019353576197}
   - component: {fileID: 7090652019353576198}
-  - component: {fileID: 7090652019353576199}
+  - component: {fileID: 1489596113}
   m_Layer: 5
   m_Name: BootPiece
   m_TagString: Untagged
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7090652019353576199
+--- !u!114 &1489596113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1378,15 +1378,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7090652019353576201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb77d525697d1dd41b96f8e37e08928e, type: 3}
+  m_Script: {fileID: 11500000, guid: 11d2e65bd0e51d440ae89949dce3b4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toolTip: {fileID: 7090652019075119923}
-  isRewardTooltip: 0
-  isHelmetSlot: 0
-  isChestSlot: 0
-  isBootSlot: 1
-  _itemSlot: {fileID: 7090652019353576201}
+  toolTip: {fileID: 7090652019075119923}
+  characterSheetArmorImage: {fileID: 7090652019353576198}
 --- !u!1 &7090652019375460905
 GameObject:
   m_ObjectHideFlags: 0
@@ -2829,12 +2825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb77d525697d1dd41b96f8e37e08928e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toolTip: {fileID: 7090652019943085614}
-  isRewardTooltip: 1
-  isHelmetSlot: 0
-  isChestSlot: 0
-  isBootSlot: 0
-  _itemSlot: {fileID: 7090652019969485762}
+  toolTip: {fileID: 7090652019943085614}
 --- !u!1 &7090652020022372135
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,7 +2999,7 @@ RectTransform:
   - {fileID: 7090652019730047930}
   - {fileID: 7090652019104625891}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4462,7 +4453,7 @@ GameObject:
   - component: {fileID: 7090652020535574406}
   - component: {fileID: 7090652020535574403}
   - component: {fileID: 7090652020535574404}
-  - component: {fileID: 7090652020535574405}
+  - component: {fileID: 1648564407}
   m_Layer: 5
   m_Name: ChestPiece
   m_TagString: Untagged
@@ -4529,7 +4520,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7090652020535574405
+--- !u!114 &1648564407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4538,15 +4529,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7090652020535574407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb77d525697d1dd41b96f8e37e08928e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d4ab74a1f4958c47a9208f26f982ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toolTip: {fileID: 7090652019051524481}
-  isRewardTooltip: 0
-  isHelmetSlot: 0
-  isChestSlot: 1
-  isBootSlot: 0
-  _itemSlot: {fileID: 7090652020535574407}
+  toolTip: {fileID: 7090652019051524481}
+  characterSheetArmorImage: {fileID: 7090652020535574404}
 --- !u!1 &7090652020574062463
 GameObject:
   m_ObjectHideFlags: 0
@@ -5347,7 +5334,7 @@ GameObject:
   - component: {fileID: 7090652020882095754}
   - component: {fileID: 7090652020882095751}
   - component: {fileID: 7090652020882095752}
-  - component: {fileID: 7090652020882095753}
+  - component: {fileID: 1956509647}
   m_Layer: 5
   m_Name: HeadPiece
   m_TagString: Untagged
@@ -5414,7 +5401,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7090652020882095753
+--- !u!114 &1956509647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5423,15 +5410,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7090652020882095755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb77d525697d1dd41b96f8e37e08928e, type: 3}
+  m_Script: {fileID: 11500000, guid: e009d07fd1d30e24cb983f1dfabd9964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toolTip: {fileID: 7090652020663439672}
-  isRewardTooltip: 0
-  isHelmetSlot: 1
-  isChestSlot: 0
-  isBootSlot: 0
-  _itemSlot: {fileID: 7090652020882095755}
+  toolTip: {fileID: 7090652020663439672}
+  characterSheetArmorImage: {fileID: 7090652020882095752}
 --- !u!1 &7090652020903610646
 GameObject:
   m_ObjectHideFlags: 0

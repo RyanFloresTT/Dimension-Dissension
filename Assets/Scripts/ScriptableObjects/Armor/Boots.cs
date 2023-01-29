@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
+﻿using Interfaces.Armor;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Armor", menuName = "Armor/Boots", order = 1)]
-public class Boots : ArmorBase
+public class Boots : ArmorBase, IIsABoot
 {
 }

@@ -1,17 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton Setup
-    public static GameManager instance { get; private set; }
-    void OnEnable() { instance = this; }
-    void OnDisable() { instance = null; }
+    public static GameManager Instance { get; private set; }
+    private void OnEnable() { Instance = this; }
+    private void OnDisable() { Instance = null; }
     
     private float _musicTimer;
     private AudioSource _audioSource;
@@ -22,8 +17,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
+        Instance = this;
         _audioSource = FindObjectOfType<AudioSource>();
     }
 
@@ -49,6 +43,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         player.transform.position = playerSpawnPoint.position;
-        questManager.InitiallizeQuest();
+        questManager.InitializeQuest();
     }
 }

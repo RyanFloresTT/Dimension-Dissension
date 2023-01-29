@@ -1,103 +1,146 @@
-using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _healthBar;
-    [SerializeField] private GameObject _questGroup;
-    [SerializeField] private GameObject _leftQuestButton;
-    [SerializeField] private GameObject _rightQuestButton;
-    [SerializeField] private GameObject _questBoard;
-    public int questIndex;
-    public KillQuest[] levelOneQuests;
-    public KillQuest currentQuest;
-
-    // Singleton Setup
-    public static QuestManager instance { get; private set; }
-    void OnEnable() { instance = this; }
-    void OnDisable() { instance = null; }
-
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject healthBar;
+    [SerializeField] private GameObject questGroup;
+    [SerializeField] private GameObject leftQuestButton;
+    [SerializeField] private GameObject rightQuestButton;
+    [SerializeField] private GameObject questBoard;
+    private int _questIndex;
+    private List<KillQuest> _quests = new();
+    private KillQuest _currentQuest;
+    public static QuestManager Instance { get; private set; }
+    private void OnEnable() { Instance = this; }
+    private void OnDisable() { Instance = null; }
+    private void Start()
     {
-        InitiallizeQuest();
+        InitializeQuest();
     }
 
-    public void InitiallizeQuest()
+    public void InitializeQuest()
     {
-        _questGroup.SetActive(true);
-        questIndex = 0;
-        currentQuest = null;
-        _healthBar.SetActive(false);
+        questGroup.SetActive(true);
+        _questIndex = 0;
+        _currentQuest = null;
+        healthBar.SetActive(false);
         Time.timeScale = 0;
         PopulateQuestList();
         UpdateScrollText();
 
-        _leftQuestButton.SetActive(false);
-        _rightQuestButton.SetActive(true);
+        leftQuestButton.SetActive(false);
+        rightQuestButton.SetActive(true);
     }
 
     private void PopulateQuestList()
     {
-        Array.Clear(levelOneQuests, 0, levelOneQuests.Length);
-        levelOneQuests = Resources.LoadAll<KillQuest>("LevelOneQuests");
+        _quests?.Clear();
+        GetRandomQuests();
+        
     }
 
-    // Sets the current objective to the first set objective
+    private void GetRandomQuests()
+    {
+        
+        _quests.Add(GetEasyQuest());
+        _quests.Add(GetMediumQuest());
+        _quests.Add(GetHardQuest());
+        
+    }
+
+    private KillQuest GetEasyQuest()
+    {
+        var questHolder = Resources.LoadAll<KillQuest>("Quests/Easy");
+        var randomIndex = Random.Range(0, questHolder.Length-1);
+        return questHolder[randomIndex];
+    }
+
+    private KillQuest GetMediumQuest()
+    {
+        var questHolder = Resources.LoadAll<KillQuest>("Quests/Medium");
+        var randomIndex = Random.Range(0, questHolder.Length-1);
+        return questHolder[randomIndex];
+    }
+
+    private KillQuest GetHardQuest()
+    {
+        var questHolder = Resources.LoadAll<KillQuest>("Quests/Hard");
+        var randomIndex = Random.Range(0, questHolder.Length-1);
+        return questHolder[randomIndex];
+    }
+
     public void OnQuestAccept()
     {
-        currentQuest = levelOneQuests[questIndex];
+        _currentQuest = _quests[_questIndex];
         StartQuest();
     }
 
     public void OnNextQuestLeftButtonClicked()
     {
-        questIndex--;
-        if (questIndex == 0)
-            _leftQuestButton.SetActive(false);
+        _questIndex--;
+        Debug.Log(_questIndex);
+        if (_questIndex == 0)
+            leftQuestButton.SetActive(false);
 
-        if (questIndex == levelOneQuests.Length - 2)
-            _rightQuestButton.SetActive(true);
+        if (_questIndex == _quests.Count - 2)
+            rightQuestButton.SetActive(true);
 
         UpdateScrollText();
     }    
 
     public void OnNextQuestRightButtonClicked()
     {
-        questIndex++;
-        if (questIndex == levelOneQuests.Length - 1)
-            _rightQuestButton.SetActive(false);
+        _questIndex++;
+        Debug.Log(_questIndex);
+        if (_questIndex == _quests.Count - 1)
+            rightQuestButton.SetActive(false);
 
-        if (questIndex == 1)
-            _leftQuestButton.SetActive(true);
+        if (_questIndex == 1)
+            leftQuestButton.SetActive(true);
 
         UpdateScrollText();
 
     }
 
-    // Puts the game back into play and starts the quest
     private void StartQuest()
     {
-        // Puts time back to normal and toggles active states of UI elements
         Time.timeScale = 1;
-        _healthBar.SetActive(true);
-        _questGroup.SetActive(false);
-        currentQuest.StartQuest();
+        healthBar.SetActive(true);
+        questGroup.SetActive(false);
+        _currentQuest.StartQuest();
 
     }
 
-    // Updates the Text of the 3 scrolls so that the player can see what options to choose
     private void UpdateScrollText()
     {
-        string questName = levelOneQuests[questIndex].questName;
-        string questDescription = levelOneQuests[questIndex].description;
-        ArmorBase reward = levelOneQuests[questIndex].reward;
+        var questName = _quests[_questIndex].questName;
+        var questDescription = _quests[_questIndex].description;
+        var reward = _quests[_questIndex].reward;
+        
+        Debug.Log(_quests[_questIndex]);
 
-        _questBoard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
-        _questBoard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
-        _questBoard.transform.Find("RewardImg").GetComponent<Image>().sprite = reward.sprite;
+        questBoard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = questName;
+        questBoard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = questDescription;
+        questBoard.transform.Find("RewardImg").GetComponent<Image>().sprite = reward.sprite;
+    }
+
+    public int GetQuestIndex()
+    {
+        return _questIndex;
+    }
+
+    public List<KillQuest> GetQuestList()
+    {
+        return _quests;
+    }
+
+    public KillQuest GetCurrentQuest()
+    {
+        return _currentQuest;
     }
 }

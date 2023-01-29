@@ -11,7 +11,7 @@ public class StartMenuEnemyAI : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Vector3 direction = CalculateDirection();
+        var direction = CalculateDirection();
         
         transform.position += direction * (movementSpeed * Time.deltaTime);
 

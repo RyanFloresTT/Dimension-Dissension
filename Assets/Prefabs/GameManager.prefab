@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5021902541402390050}
   - component: {fileID: 5021902541402390061}
   - component: {fileID: 5021902541402390060}
+  - component: {fileID: 2099410830}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -49,6 +50,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1309a09120ec4a40b4f73c562ee8509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5021902541402390048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a95b0386c49033f4da5bc360abfad099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cursorTexture: {fileID: 2800000, guid: b8bec0b662a44144daecca93c08c6d54, type: 3}
-  _hotspot: {x: 8, y: 8}
+  cursorTexture: {fileID: 2800000, guid: b8bec0b662a44144daecca93c08c6d54, type: 3}
+  hotspot: {x: 8, y: 8}
 --- !u!114 &5021902541402390051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,14 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99b5c91d3c568bc4db827eb3482bb90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthText: {fileID: 0}
-  _questGroup: {fileID: 0}
-  _leftQuestButton: {fileID: 0}
-  _rightQuestButton: {fileID: 0}
-  _questBoard: {fileID: 0}
-  questIndex: 0
-  levelOneQuests: []
-  currentQuest: {fileID: 0}
+  healthBar: {fileID: 0}
+  questGroup: {fileID: 0}
+  leftQuestButton: {fileID: 0}
+  rightQuestButton: {fileID: 0}
+  questBoard: {fileID: 0}
+  questChoiceAmount: 3
 --- !u!114 &5021902541402390050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3097f60434e531142ba01124a8902221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameMusic: {fileID: 8300000, guid: 6475edf71eb6dcd42baf3f2c2c197dcb, type: 3}
+  player: {fileID: 0}
+  playerSpawnPoint: {fileID: 0}
+  questManager: {fileID: 5021902541402390051}
 --- !u!114 &5021902541402390061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +153,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ccaed7fb71cbb64f8b1eefb269d1f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rewardMenu: {fileID: 0}
+  rewardMenu: {fileID: 0}
+  levelLoadDelay: 1.5
+  transitionAnimator: {fileID: 0}
+  tooltips:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5021902541402390060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,4 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0969d083a2f87439b075249e375111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterSheet: {fileID: 0}
+  characterSheet: {fileID: 0}
+--- !u!114 &2099410830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5021902541402390055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762219c27d7fd8c47949cba5c91ac454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

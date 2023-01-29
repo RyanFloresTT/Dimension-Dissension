@@ -184,16 +184,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
-  _armorMultiplier: 0.1
-  _damageMultiplier: 0.1
-  _healthBar: {fileID: 0}
+  armorMultiplier: 0.1
+  damageMultiplier: 0.1
+  healthBar: {fileID: 0}
   playerMaterial: {fileID: 2100000, guid: 1304f82fd89c653489457f790f642d90, type: 2}
   zoomDelay: 2
   zoomSpeed: 2
   audioSource: {fileID: 0}
   deathClip: {fileID: 8300000, guid: 487269cf3bdff0a4aafa0504f2ec8f18, type: 3}
   onHitClip: {fileID: 8300000, guid: fd4b5eef59b993d46b54329f1e4b65db, type: 3}
-  IsAlive: 1
+  isAlive: 1
 --- !u!114 &1058376544
 MonoBehaviour:
   m_ObjectHideFlags: 0
