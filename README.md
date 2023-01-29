@@ -14,9 +14,6 @@
 ![gameover](https://user-images.githubusercontent.com/53247675/215357430-159c876e-7718-45d4-b483-120b7d5f6c2b.PNG)
 
 
-
-More screenshots to come!
-
 ## Built With
 
 * [Unity](https://www.unity.com)
