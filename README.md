@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 - Check out the asset pack Tiny Dungeon [here](https://www.kenney.nl/assets/tiny-dungeon)
 
 ## Sound
-- I don't have any sound in the game just yet, but I have just as much skill creating music and sound as I do with art so check out the assets I've used later here
+- I used the SFX and Music from the MiniFantasy pack, you can find it [here](https://leohpaz.itch.io/minifantasy-dungeon-sfx-pack)
 
 ## Things I've Learned
 
