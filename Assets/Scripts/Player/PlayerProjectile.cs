@@ -14,7 +14,7 @@ public class PlayerProjectile : MonoBehaviour, IIsProjectile
         player = Player.Instance;
         damageMultiplier = player.damageMultiplier;
         Damage = 1;
-        Damage += player.AttackBonus * damageMultiplier;
+        Damage += (player.AttackBonus * damageMultiplier)/100;
     }
 
     private void Update()

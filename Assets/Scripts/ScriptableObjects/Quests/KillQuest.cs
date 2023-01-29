@@ -1,5 +1,6 @@
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Quests", menuName = "Quests/KillQuest", order = 1)]
 public class KillQuest : ScriptableObject
@@ -16,12 +17,14 @@ public class KillQuest : ScriptableObject
     private RewardHandler _rewardHandler;
     private EnemySpawner _enemySpawner;
     private GameObject _enemyPrefab;
-    [SerializeField] LevelData _levelData;
+    [SerializeField] private LevelData levelData;
+    private Player _player;
 
     public void StartQuest()
     {
         _progress = 0;
         _rewardHandler = RewardHandler.Instance;
+        _player = Player.Instance;
         _enemySpawner = FindObjectOfType<EnemySpawner>();
         _enemyPrefab = ChooseRandomEnemy(prefabs);
         SpawnQuestEntities(_enemyPrefab);
@@ -38,7 +41,14 @@ public class KillQuest : ScriptableObject
     private void CompleteQuest()    
     {
         _rewardHandler.HandleRewards(reward);
-        _levelData.NextLevel();
+        levelData.NextLevel();
+        HealPlayer();
+    }
+
+    private void HealPlayer()
+    {
+        if (_player.CurrentHealth >= _player.MaxHealth) return;
+        _player.Heal(1);
     }
 
     private void SpawnQuestEntities(GameObject entity)

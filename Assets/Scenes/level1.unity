@@ -28763,6 +28763,14 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 1436641469}
+    - target: {fileID: 7361031089348848618, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: armorMultiplier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361031089348848618, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
+      propertyPath: damageMultiplier
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7577593957954630405, guid: 46c0dc260ec120d459f0b0cf28d590f5, type: 3}
       propertyPath: audioSource
       value: 

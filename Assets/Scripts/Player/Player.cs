@@ -67,6 +67,12 @@ public class Player : MonoBehaviour, IHasHealth, IHasStats
         Debug.Log("Player took :" + updatedDamage + " damage.");
         healthBar.SetHealth(CurrentHealth);
     }
+
+    public void Heal(float health)
+    {
+        CurrentHealth += health;
+        healthBar.SetHealth(CurrentHealth);
+    }
     
     // On Player Death
     public void OnDeath()

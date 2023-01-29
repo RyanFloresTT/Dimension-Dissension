@@ -20,4 +20,4 @@ MonoBehaviour:
   - {fileID: 4441000244151731676, guid: 4d34e61cb2f10b641b6bef9afa77381f, type: 3}
   requirement: 8
   reward: {fileID: 11400000, guid: 71e8165fff478cd48ad85ef63500d38f, type: 2}
-  _levelData: {fileID: 11400000, guid: 46c9b96145f78a942b8ca157d0c4336d, type: 2}
+  levelData: {fileID: 11400000, guid: 46c9b96145f78a942b8ca157d0c4336d, type: 2}

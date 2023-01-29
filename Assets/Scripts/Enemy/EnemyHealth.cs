@@ -31,6 +31,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     {
         CurrentHealth -= damage;
         audioSource.PlayOneShot(onHitClip);
+        Debug.Log("Enemy took "+ damage + " damage.");
         if (CurrentHealth <= 0)
         {
             OnDeath();
