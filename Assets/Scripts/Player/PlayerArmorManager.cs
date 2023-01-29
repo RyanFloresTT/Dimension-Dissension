@@ -1,41 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerArmorManager : MonoBehaviour
 {
-    // Singleton Setup
-    public static PlayerArmorManager instance { get; private set; }
-    void OnEnable() { instance = this; }
-    void OnDisable() { instance = null; }
+    public static PlayerArmorManager Instance { get; private set; }
+    private void OnEnable() { Instance = this; }
+    private void OnDisable() { Instance = null; }
 
-    [SerializeField] public List<ArmorBase> armorList = new List<ArmorBase>();
+    [SerializeField] private List<ArmorBase> armorList = new();
 
     private Player _player;
     private void Start()
     {
-        // populate the armorList from the serialized array
-        _player = Player.instance;
-
-        if (armorList.Count != 0)
-        {  
-            // If there is armor in the array, then make sure to add those to the player's stats
-            AddArmorStats();
-        } else
-        {
-            // set default armor and attack bonus to 0 if there is no currently equiped armor
-            _player.AttackBonus = 0;
-            _player.ArmorBonus = 0;
-        }
+        _player = Player.Instance;
+        
+        armorList.Clear();
+        _player.AttackBonus = 0;
+        _player.ArmorBonus = 0;
     }
 
     private void AddArmorStats()
     {
-        // Set Stats to zero before adding all armor stats
         _player.AttackBonus = 0;
         _player.ArmorBonus = 0;
-        foreach (ArmorBase armor in armorList)
+        foreach (var armor in armorList)
         {
             _player.AttackBonus += armor.attackRating;
             _player.ArmorBonus += armor.armorRating;
@@ -46,5 +35,19 @@ public class PlayerArmorManager : MonoBehaviour
     {
         armorList.Add(armor);
         AddArmorStats();
+        Debug.Log("Added " + armor+".");
+    }
+
+    public void SwitchArmorPiece(ArmorBase newArmor, ArmorBase currentArmor)
+    {
+        var armorIndex = armorList.FindIndex(d=>d == currentArmor);
+        Debug.Log(armorIndex);
+        armorList.RemoveAt(armorIndex);
+        Debug.Log("Switched " + currentArmor + "with " + newArmor+ ".");
+    }
+
+    public List<ArmorBase> GetArmorList()
+    {
+        return armorList;
     }
 }

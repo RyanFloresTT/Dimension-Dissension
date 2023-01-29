@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Armor;
+using UnityEngine;
 
 public class ArmorBase : ScriptableObject
 {
@@ -6,4 +7,10 @@ public class ArmorBase : ScriptableObject
     [SerializeField] public float attackRating;
     [SerializeField] public float armorRating;
     [SerializeField] public Sprite sprite;
+    [SerializeField] public ArmorType armorType;
+
+    public ArmorType GetArmorType()
+    {
+        return armorType;
+    }
 }

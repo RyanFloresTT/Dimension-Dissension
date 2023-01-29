@@ -16,3 +16,4 @@ MonoBehaviour:
   attackRating: 2
   armorRating: 2
   sprite: {fileID: -2124343901, guid: 7ad938cfd4954244da53e525de370b45, type: 3}
+  armorType: 2

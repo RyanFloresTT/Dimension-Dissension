@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using ScriptableObjects;
 using TMPro;
 using UnityEngine;
 
 public class GameOverLevel : MonoBehaviour
 {
-    private LevelManager _levelManager;
+    [SerializeField] private LevelData levelData;
     [SerializeField] private TextMeshProUGUI levelText;
 
     private void Start()
     {
-        _levelManager = LevelManager.instance;
-        levelText.text = (_levelManager.GetLevel().ToString());
+        levelText.text = (levelData.GetLevel().ToString());
     }
     
 }

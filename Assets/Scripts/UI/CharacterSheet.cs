@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CharacterSheet : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _attackRatingText;
-    [SerializeField] private TextMeshProUGUI _armorRatingText;
+    [SerializeField] private TextMeshProUGUI attackRatingText;
+    [SerializeField] private TextMeshProUGUI armorRatingText;
     private Player _player;
 
     private void Start()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
     }
 
     private void Update()
     {
-        _attackRatingText.text = "" + _player.AttackBonus;
-        _armorRatingText.text = "" + _player.ArmorBonus;
+        attackRatingText.text = "" + _player.AttackBonus;
+        armorRatingText.text = "" + _player.ArmorBonus;
     }
 }

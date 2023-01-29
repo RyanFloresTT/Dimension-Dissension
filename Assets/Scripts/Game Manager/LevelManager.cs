@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelManager : MonoBehaviour
 {
-    // Singleton Setup
-    public static LevelManager instance { get; private set; }
-    void OnEnable() { instance = this; }
-    void OnDisable() { instance = null; }
+    [SerializeField] private LevelData levelData;
 
-    private int _level = 1;
-
-    public int GetLevel()
+    private void Start()
     {
-        return _level;
+        levelData.ResetLevel();
     }
-
-    public void NextLevel()
-    {
-        _level += 1;
-    }
-    
 }

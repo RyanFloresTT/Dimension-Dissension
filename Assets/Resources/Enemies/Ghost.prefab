@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6df47beca65164a854adbe4dc20231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
-  _attackRange: 1
+  speed: 5
+  attackRange: 1
 --- !u!114 &7890662137822282666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
-  IsAlive: 1
   deathDelay: 0.5
   audioSource: {fileID: 0}
   onHitClip: {fileID: 8300000, guid: e81aa5813f6c50a459733a10eeccc30c, type: 3}

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -10,62 +7,38 @@ public class PlayerCombat : MonoBehaviour
     public float projectileSpeed = 5.0f;
     public GameObject projPrefab;
     private Player _player;
+    private Camera _camera;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip fireProjectileClip;
-    private void Start()
+    private void Awake()
     {
-        _player = Player.instance;
+        _player = Player.Instance;
+        _camera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
-        if (!_player.IsAlive) return;
-        // Check if the player is holding down the attack button
-        if (Input.GetButton("Fire1"))
-        {
-            // Check if the attack delay has passed
-            if (Time.time > attackTime)
-            {
-                // Get mouse position
-                Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePosition.z = transform.position.z;
-
-                // Calculate the direction to the mouse
-                Vector3 direction = (mousePosition - transform.position).normalized;
-                // Perform an attack, sending the direction var to instantiate
-                Attack(direction);
-
-                // Set the attack time to the current time plus the attack delay
-                attackTime = Time.time + attackDelay;
-            }
-        }
+        if (!_player.isAlive) return;
+        if (!Input.GetButton("Fire1")) return;
+        if (!(Time.time > attackTime)) return;
+        var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = transform.position.z;
+        var direction = (mousePosition - transform.position).normalized;
+        Attack(direction);
+        attackTime = Time.time + attackDelay;
     }
-    // Shoot the projectile at the cursor location, rotating the sprite to point towards it as well.
-    void Attack(Vector3 direction)
+
+    private void Attack(Vector3 direction)
     {
         PlayAttackAudio();
-        
-        // Create a projectile game object
-        GameObject projectile = Instantiate(projPrefab, transform.position, Quaternion.identity);
-
-        // Calculate the angle between the projectile's direction and the cursor click
-        float angle = Vector3.SignedAngle(Vector3.right, direction, Vector3.forward);
-
-        // Rotate the projectile to the correct angle
+        var projectile = Instantiate(projPrefab, transform.position, Quaternion.identity);
+        var angle = Vector3.SignedAngle(Vector3.right, direction, Vector3.forward);
         projectile.transform.rotation = Quaternion.Euler(0, 0, angle);
-
-        // Set the direction of the arcane bolt
-        projectile.GetComponent<PlayerProjectile>().direction = direction;
-
-        // Set the speed of the projectile
-        projectile.GetComponent<PlayerProjectile>().speed = projectileSpeed;
-
-        // Set the player as the owner of the arcane bolt
-        projectile.GetComponent<PlayerProjectile>().owner = gameObject;
-
-        // Destroy Projectile after 2 seconds
+        var projectileComponent = projectile.GetComponent<PlayerProjectile>();
+        projectileComponent.direction = direction;
+        projectileComponent.speed = projectileSpeed;
+        projectileComponent.owner = gameObject;
         Destroy(projectile, 2);
     }
 

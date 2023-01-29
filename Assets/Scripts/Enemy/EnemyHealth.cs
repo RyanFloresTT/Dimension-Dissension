@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IHasHealth
 {
     private QuestManager _questManager;
     private Animator _animator;
-    public int startingHealth = 10;
+    [SerializeField] private int startingHealth = 10;
     public float MaxHealth { get; set; }
     public float CurrentHealth { get; set; }
-    public bool IsAlive = true;
+    private bool _isAlive = true;
     [SerializeField] private float deathDelay = .5f;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip onHitClip;
@@ -18,7 +16,7 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _questManager = QuestManager.instance;
+        _questManager = QuestManager.Instance;
         audioSource = FindObjectOfType<AudioSource>();
     }
 
@@ -42,9 +40,14 @@ public class EnemyHealth : MonoBehaviour, IHasHealth
     // On Object Death
     public void OnDeath()
     {
-        IsAlive = false;
-        _questManager.currentQuest.UpdateQuestProgress(1);
+        _isAlive = false;
+        _questManager.GetCurrentQuest().UpdateQuestProgress(1);
         _animator.SetTrigger("Die");
         Destroy(gameObject, deathDelay);
+    }
+
+    public bool IsCurrentlyAlive()
+    {
+        return _isAlive;
     }
 }
