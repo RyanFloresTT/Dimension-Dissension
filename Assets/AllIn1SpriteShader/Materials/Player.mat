@@ -121,7 +121,7 @@ Material:
     - _GhostBlend: 1
     - _GhostColorBoost: 1
     - _GhostTransparency: 0
-    - _GlitchAmount: 0
+    - _GlitchAmount: 3
     - _GlitchSize: 1
     - _Glow: 10
     - _GlowGlobal: 1
@@ -150,7 +150,7 @@ Material:
     - _HsvBright: 1
     - _HsvSaturation: 1
     - _HsvShift: 180
-    - _InnerOutlineAlpha: 0
+    - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 4
     - _InnerOutlineThickness: 1
     - _MaxXUV: 1
